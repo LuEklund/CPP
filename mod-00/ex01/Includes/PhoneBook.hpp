@@ -11,24 +11,20 @@
 /* ************************************************************************** */
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
+# include "Contact.hpp"
 
 class PhoneBook
 {
 private:
-	/* data */
+	Contact contacts[8];
+	int	display();
+	int	next;
 public:
-	PhoneBook(/* args */);
+	int	addContact();
+	int	search();
+	PhoneBook();
 	~PhoneBook();
 };
-
-PhoneBook::PhoneBook(/* args */)
-{
-}
-
-PhoneBook::~PhoneBook()
-{
-}
-
 
 #endif
 

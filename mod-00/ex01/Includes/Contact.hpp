@@ -11,23 +11,28 @@
 /* ************************************************************************** */
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
-
+# include <string>
 class Contact
 {
 private:
-	/* data */
+	std::string 	fName;
+	std::string 	lName;
+	std::string 	Nname;
+	std::string		Number;
+	std::string		Secret;
 public:
-	Contact(/* args */);
+	int	update(std::string &fname,
+				std::string &lName,
+				std::string &Nname,
+				std::string &Number,
+				std::string &Secret);
+	int	displayInfo();
+	int	displayFull();
+	Contact();
 	~Contact();
 };
 
-Contact::Contact(/* args */)
-{
-}
 
-Contact::~Contact()
-{
-}
 
 
 #endif
