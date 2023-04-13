@@ -1,9 +1,9 @@
-NAME = phonebook
+NAME = account
 
 FLAGS = -Wall -Werror -Wextra -I Includes -std=c++98
 
-HEADER = Includes/Contact.hpp Includes/PhoneBook.hpp
-SRC = main.cpp ContactClass.cpp PhoneBookClass.cpp
+HEADER = Includes/Account.hpp
+SRC = Account.cpp tests.cpp
 
 SRC_DIR = src/
 OBJ_DIR = obj/
@@ -13,7 +13,7 @@ OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 all : $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
-	c++ $(FLAGS) -c $< -o $@ 
+	c++ $(FLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
