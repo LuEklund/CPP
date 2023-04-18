@@ -22,4 +22,6 @@ void	HumanA::attack()
 
 HumanA::~HumanA()
 {
+	std::cout << "HumanA was destroyed" << std::endl;
+
 }

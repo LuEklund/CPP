@@ -12,7 +12,9 @@
 # include "HumanB.hpp"
 # include <iostream>
 
-HumanB::HumanB(std::string name) : _name(name), _wep(nullptr){
+HumanB::HumanB(std::string name)
+{
+	this->_name = name;
 }
 
 void	HumanB::attack()
@@ -27,5 +29,6 @@ void	HumanB::setWeapon(Weapon& wep)
 
 HumanB::~HumanB()
 {
+	std::cout << "HumanB was destroyed" << std::endl;
 }
 
