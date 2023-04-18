@@ -36,6 +36,7 @@ void	checkLine::write_line(std::string line, std::ofstream& newFile)
 			i++;
 		}
 	}
+	//DO YOU ALLWAYS NEED NEWLINE?????
 	newFile << "\n";
 
 }
