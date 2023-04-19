@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "Fixed.hpp"
-#include <iostream>
+#include <cmath>
 
 Fixed::Fixed()
 {
@@ -18,7 +18,19 @@ Fixed::Fixed()
 	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(Fixed &to_copy_from)
+
+
+Fixed::Fixed(const int integer) : fixed_point(integer << bit)
+{
+	std::cout << "Int constructor called" << std::endl;
+}
+Fixed::Fixed(const float floater) : fixed_point(std::roundf(floater * (1 << bit)))
+{
+	std::cout << "Float constructor called" << std::endl;
+}
+
+
+Fixed::Fixed(const Fixed &to_copy_from)
 {
 	this->fixed_point = to_copy_from.getRawBits();
 	std::cout << "Copy constructor called" << std::endl;
@@ -28,14 +40,24 @@ Fixed& Fixed::operator=(const Fixed& other)
 {
 	if (this == &other)
 		return (*this);
-	fixed_point = other.getRawBits();
 	std::cout << "Copy assignment operator called" << std::endl;
+	fixed_point = other.getRawBits();
 	return (*this);
 }
 
 Fixed::~Fixed()
 {
 	std::cout << "Destructor called" << std::endl;
+}
+
+int Fixed::toInt( void ) const
+{
+	return (fixed_point >> 8);
+}
+
+float Fixed::toFloat( void ) const
+{
+	return ((float)fixed_point / (1 << bit));
 }
 
 int Fixed::getRawBits( void ) const
@@ -47,6 +69,12 @@ int Fixed::getRawBits( void ) const
 void Fixed::setRawBits( int const raw )
 {
 	fixed_point = raw;
+}
+
+std::ostream& operator<<(std::ostream& outPut, const Fixed& fixed_class)
+{
+	outPut << fixed_class.toFloat();
+	return (outPut);
 }
 
 const int	Fixed::bit = 8;
