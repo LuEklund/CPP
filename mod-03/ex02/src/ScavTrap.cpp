@@ -22,6 +22,14 @@ void ScavTrap::attack(const std::string& target)
 	if(setEnergy(getEnergy() - 1))
 		std::cout << "ScavTrap: " << getName() << " attacks " << target << " causing " << getAttack() << " points of damage!" << std::endl;
 }
+void ScavTrap::takeDamage(unsigned int amount)
+{
+	ClapTrap::takeDamage(amount);
+}
+void ScavTrap::beRepaired(unsigned int amount)
+{
+	ClapTrap::beRepaired(amount);
+}
 
 void ScavTrap::guardGate()
 {

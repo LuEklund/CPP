@@ -10,22 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 
 int	main()
 {
-	ClapTrap a("coolGuy");
-	a.attack("badGuy");
-	a.takeDamage(3);
-	a.beRepaired(4);
+	// ClapTrap a("coolGuy");
+	// a.attack("badGuy");
+	// a.takeDamage(3);
+	// a.beRepaired(4);
 
-	ScavTrap b("poopi");
-	b.attack("badGuy");
-	b.attack("badGuy");
-	b.attack("badGuy");
-	b.takeDamage(3);
-	b.takeDamage(3);
-	b.beRepaired(4);
-	b.guardGate();
+	// ScavTrap b("poopi");
+	// b.attack("badGuy");
+	// b.attack("badGuy");
+	// b.attack("badGuy");
+	// b.takeDamage(3);
+	// b.takeDamage(3);
+	// b.beRepaired(4);
+	// b.guardGate();
+
+	FragTrap c("MOO");
+	c.highFivesGuys();
+	c.attack("bad guy");
+	c.beRepaired(3);
 	return (0);
 }
