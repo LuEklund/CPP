@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leklund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/20 14:40:45 by leklund           #+#    #+#             */
-/*   Updated: 2023/04/20 14:40:47 by leklund          ###   ########.fr       */
+/*   Created: 2023/04/21 08:13:13 by leklund           #+#    #+#             */
+/*   Updated: 2023/04/21 08:13:15 by leklund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ScavTrap.hpp"
+#ifndef FRAGTRAP_HPP
+# define FRAGTRAP_HPP
+# include "ClapTrap.hpp"
 
-
-int	main()
+class FragTrap : virtual public ClapTrap
 {
-	// ClapTrap a("coolGuy");
-	// a.attack("badGuy");
-	// a.takeDamage(3);
-	// a.beRepaired(4);
+private:
+	
+public:
+	FragTrap(void);
+	FragTrap(std::string name);
+	void highFivesGuys(void);
+	unsigned int getAttack() const { return _attack; }
+	~FragTrap();
+};
 
-	ScavTrap b("poopi");
-	b.attack("badGuy");
-	b.attack("badGuy");
-	b.attack("badGuy");
-	b.takeDamage(3);
-	b.takeDamage(3);
-	b.beRepaired(4);
-	b.guardGate();
-	return (0);
-}
+
+#endif

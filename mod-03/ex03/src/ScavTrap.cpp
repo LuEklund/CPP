@@ -11,6 +11,11 @@
 /* ************************************************************************** */
 #include "ScavTrap.hpp"
 
+ScavTrap::ScavTrap(void)
+{
+	std::cout << "Constructor ScavTrap called initialized." << std::endl;
+	return ;
+}
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {

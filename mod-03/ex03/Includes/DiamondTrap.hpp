@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leklund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/20 14:40:45 by leklund           #+#    #+#             */
-/*   Updated: 2023/04/20 14:40:47 by leklund          ###   ########.fr       */
+/*   Created: 2023/04/21 08:33:06 by leklund           #+#    #+#             */
+/*   Updated: 2023/04/21 08:33:08 by leklund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ScavTrap.hpp"
+#ifndef DIAMONDTRAP_HPP
+# define DIAMONDTRAP_HPP
+# include "FragTrap.hpp"
+# include "ScavTrap.hpp"
 
-
-int	main()
+class DiamondTrap : public FragTrap, public ScavTrap
 {
-	// ClapTrap a("coolGuy");
-	// a.attack("badGuy");
-	// a.takeDamage(3);
-	// a.beRepaired(4);
+private:
+	std::string		_name;
+public:
+	DiamondTrap(std::string name);
+	void attack(const std::string& target);
+	~DiamondTrap();
+};
 
-	ScavTrap b("poopi");
-	b.attack("badGuy");
-	b.attack("badGuy");
-	b.attack("badGuy");
-	b.takeDamage(3);
-	b.takeDamage(3);
-	b.beRepaired(4);
-	b.guardGate();
-	return (0);
-}
+
+#endif

@@ -11,6 +11,12 @@
 /* ************************************************************************** */
 # include "FragTrap.hpp"
 
+FragTrap::FragTrap(void)
+{
+	std::cout << "Constructor ScavTrap called initialized." << std::endl;
+	return ;
+}
+
 FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
 	_health = 100;

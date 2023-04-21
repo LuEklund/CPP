@@ -11,11 +11,6 @@
 /* ************************************************************************** */
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(std::string name, unsigned int health, unsigned int energy, unsigned int attack) : _name(name), _health(health), _energy(energy), _attack(attack)
-{
-	std::cout << "ClapTrap: " << name << " was constructed" << std::endl;
-}
-
 ClapTrap::ClapTrap(std::string name) : _name(name), _health(10), _energy(10), _attack(0)
 {
 	std::cout << "ClapTrap: " << name << " was constructed" << std::endl;
@@ -67,32 +62,4 @@ bool	ClapTrap::isWorking()
 		return (false);
 	}
 	return (true);
-}
-
-std::string	ClapTrap::getName(void)
-{
-	return(_name);
-}
-
-unsigned int	ClapTrap::getHealth(void)
-{
-	return(_health);
-}
-
-unsigned int	ClapTrap::getEnergy(void)
-{
-	return(_energy);
-}
-
-unsigned int	ClapTrap::getAttack(void)
-{
-	return(_attack);
-}
-
-bool	ClapTrap::setEnergy(int amount)
-{
-	if(!isWorking() || amount < 0)
-		return(false);
-	_energy = amount;
-	return(true);
 }

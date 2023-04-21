@@ -11,6 +11,12 @@
 /* ************************************************************************** */
 #include "ClapTrap.hpp"
 
+ClapTrap::ClapTrap(void)
+{
+	std::cout << "ClapTrap Constructor called initialized." << std::endl;
+	return ;
+}
+
 ClapTrap::ClapTrap(std::string name) : _name(name), _health(10), _energy(10), _attack(0)
 {
 	std::cout << "ClapTrap: " << name << " was constructed" << std::endl;
@@ -21,7 +27,7 @@ void ClapTrap::attack(const std::string& target)
 	if(!isWorking())
 		return ;
 	_energy--;
-	std::cout << "ClapTrap: " << _name << " attacks " << target << " causing " << _attack << " points of damage!" << std::endl;
+	std::cout << _name << " attacks " << target << " causing " << _attack << " points of damage!" << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)

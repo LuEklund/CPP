@@ -12,31 +12,35 @@
 #include "ScavTrap.hpp"
 
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name, 100, 50, 20)
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
+	_health = 100;
+	_energy = 50;
+	_attack = 20;
 	std::cout << "ScavTrap: " << name << " was constructed" << std::endl;
 }
 
 void ScavTrap::attack(const std::string& target)
 {
-	if(setEnergy(getEnergy() - 1))
-		std::cout << "ScavTrap: " << getName() << " attacks " << target << " causing " << getAttack() << " points of damage!" << std::endl;
-}
-void ScavTrap::takeDamage(unsigned int amount)
-{
-	ClapTrap::takeDamage(amount);
-}
-void ScavTrap::beRepaired(unsigned int amount)
-{
-	ClapTrap::beRepaired(amount);
+	if(!_health)
+	{
+		std::cout << "ScavTrap: " << _name << " is dieded, can not attack!" << std::endl;
+		return ;
+	}
+	if(!_energy)
+	{
+		std::cout << "ScavTrap: " << _name << " is tired, can not attack!" << std::endl;
+		return ;
+	}
+		std::cout << "ScavTrap: " << _name << " attacks " << target << " causing " << _attack << " points of damage!" << std::endl;
 }
 
 void ScavTrap::guardGate()
 {
-	std::cout << "ScavTrap: " << getName() << " is now in Gatekeeper mode" << std::endl;
+	std::cout << "ScavTrap: " << _name << " is now in Gatekeeper mode" << std::endl;
 }
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << "ScavTrap: " << getName() << " was destroyed" << std::endl;
+	std::cout << "ScavTrap: " << _name << " was destroyed" << std::endl;
 }

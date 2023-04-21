@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leklund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/20 14:40:45 by leklund           #+#    #+#             */
-/*   Updated: 2023/04/20 14:40:47 by leklund          ###   ########.fr       */
+/*   Created: 2023/04/20 15:23:53 by leklund           #+#    #+#             */
+/*   Updated: 2023/04/20 15:23:54 by leklund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ScavTrap.hpp"
+#ifndef SCAVTRAP_HPP
+#define SCAVTRAP_HPP
+#include "ClapTrap.hpp"
 
-
-int	main()
+class ScavTrap : virtual public ClapTrap
 {
-	// ClapTrap a("coolGuy");
-	// a.attack("badGuy");
-	// a.takeDamage(3);
-	// a.beRepaired(4);
+private:
 
-	ScavTrap b("poopi");
-	b.attack("badGuy");
-	b.attack("badGuy");
-	b.attack("badGuy");
-	b.takeDamage(3);
-	b.takeDamage(3);
-	b.beRepaired(4);
-	b.guardGate();
-	return (0);
-}
+public:
+	ScavTrap(void);
+	ScavTrap(std::string name);
+	void attack(const std::string& target);
+	void guardGate();
+	~ScavTrap();
+};
+
+
+#endif

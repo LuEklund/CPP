@@ -16,25 +16,18 @@
 
 class ClapTrap
 {
-private:
+protected:
 	std::string		_name;
 	unsigned int	_health;
 	unsigned int	_energy;
 	unsigned int	_attack;
 	bool			isWorking();
 public:
-	ClapTrap(std::string name, unsigned int health, unsigned int energy, unsigned int attack);
 	ClapTrap(std::string name);
 	ClapTrap();
 	void attack(const std::string& target);
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);
-	std::string		getName(void);
-	unsigned int	getHealth(void);
-	unsigned int	getEnergy(void);
-	unsigned int	getAttack(void);
-	bool			setEnergy(int amount);
-
 	~ClapTrap();
 };
 
