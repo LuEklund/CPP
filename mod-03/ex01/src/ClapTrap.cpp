@@ -10,11 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "ClapTrap.hpp"
-#include <iostream>
+
+ClapTrap::ClapTrap(std::string name, unsigned int health, unsigned int energy, unsigned int attack) : _name(name), _health(health), _energy(energy), _attack(attack)
+{
+	std::cout << "ClapTrap: " << name << " was constructed" << std::endl;
+}
 
 ClapTrap::ClapTrap(std::string name) : _name(name), _health(10), _energy(10), _attack(0)
 {
-	std::cout << name << " was constructed" << std::endl;
+	std::cout << "ClapTrap: " << name << " was constructed" << std::endl;
 }
 
 void ClapTrap::attack(const std::string& target)
@@ -32,7 +36,8 @@ void ClapTrap::takeDamage(unsigned int amount)
 		std::cout << _name << " is allready dead" << std::endl;
 		return ;
 	}
-	std::cout << "ClapTrap: " << _name << " took " << amount << " points of damage!" << std::endl;
+	_health--;
+	std::cout << _name << " took " << amount << " points of damage!" << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
@@ -40,12 +45,13 @@ void ClapTrap::beRepaired(unsigned int amount)
 	if(!isWorking())
 		return ;
 	_energy--;
-	std::cout << "ClapTrap: " << _name << " repairs them self " << amount << " points!" << std::endl;	
+	_health += amount;
+	std::cout << _name << " repairs them self " << amount << " points!" << std::endl;	
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << _name << " was destroyed" << std::endl;
+	std::cout << "ClapTrap: " << _name << " was destroyed" << std::endl;
 }
 
 bool	ClapTrap::isWorking()
@@ -61,4 +67,32 @@ bool	ClapTrap::isWorking()
 		return (false);
 	}
 	return (true);
+}
+
+std::string	ClapTrap::getName(void)
+{
+	return(_name);
+}
+
+unsigned int	ClapTrap::getHealth(void)
+{
+	return(_health);
+}
+
+unsigned int	ClapTrap::getEnergy(void)
+{
+	return(_energy);
+}
+
+unsigned int	ClapTrap::getAttack(void)
+{
+	return(_attack);
+}
+
+bool	ClapTrap::setEnergy(int amount)
+{
+	if(!isWorking() || amount < 0)
+		return(false);
+	_energy = amount;
+	return(true);
 }

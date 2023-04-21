@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leklund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/20 14:40:39 by leklund           #+#    #+#             */
-/*   Updated: 2023/04/20 14:40:41 by leklund          ###   ########.fr       */
+/*   Created: 2023/04/20 14:40:45 by leklund           #+#    #+#             */
+/*   Updated: 2023/04/20 14:40:47 by leklund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef CLAPTRAP_HPP
-# define CLAPTRAP_HPP
-# include <string>
+#include "ScavTrap.hpp"
 
-class ClapTrap
+
+int	main()
 {
-private:
-	std::string	_name;
-	int			_health;
-	int			_energy;
-	int			_attack;
-	bool			isWorking();
-public:
-	ClapTrap(std::string name);
-	void attack(const std::string& target);
-	void takeDamage(unsigned int amount);
-	void beRepaired(unsigned int amount);
-	~ClapTrap();
-};
+	// ClapTrap a("coolGuy");
+	// a.attack("badGuy");
+	// a.takeDamage(3);
+	// a.beRepaired(4);
 
-
-
-#endif
+	ScavTrap b("poopi");
+	b.attack("badGuy");
+	b.attack("badGuy");
+	b.attack("badGuy");
+	b.takeDamage(3);
+	b.takeDamage(3);
+	b.beRepaired(4);
+	return (0);
+}

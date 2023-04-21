@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leklund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/20 14:40:39 by leklund           #+#    #+#             */
-/*   Updated: 2023/04/20 14:40:41 by leklund          ###   ########.fr       */
+/*   Created: 2023/04/20 15:23:53 by leklund           #+#    #+#             */
+/*   Updated: 2023/04/20 15:23:54 by leklund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef CLAPTRAP_HPP
-# define CLAPTRAP_HPP
-# include <string>
+#ifndef SCAVTRAP_HPP
+#define SCAVTRAP_HPP
+#include "ClapTrap.hpp"
 
-class ClapTrap
+class ScavTrap : public ClapTrap
 {
 private:
-	std::string	_name;
-	int			_health;
-	int			_energy;
-	int			_attack;
-	bool			isWorking();
+
 public:
-	ClapTrap(std::string name);
+	ScavTrap(std::string name);
 	void attack(const std::string& target);
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);
-	~ClapTrap();
+	~ScavTrap();
 };
-
 
 
 #endif
