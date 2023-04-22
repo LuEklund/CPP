@@ -10,55 +10,43 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "DiamondTrap.hpp"
-/*
-• Hit points (FragTrap)
-• Energy points (ScavTrap)
-• Attack damage (FragTrap)
-• attack() (Scavtrap)
-*/
 
-
-
-DiamondTrap::DiamondTrap(std::string name)
+DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), FragTrap(name), ScavTrap(name)
 {
-	ClapTrap(name + "_clap_trap");
-	this->_name = name;
-	this->_health = FragTrap::_health;
-	this->_energy = ScavTrap::_energy;
-	this->_attack = FragTrap::_attack;
-	std::cout << "DiamondTrap-_health: " << _health << " should be " << FragTrap::_health << std::endl;
-	std::cout << "DiamondTrap-_energy: " << _energy << " should be " << ScavTrap::_energy << std::endl;
-	std::cout << "DiamondTrap-_attack: " << _attack << " should be " << FragTrap::_attack << std::endl;
-	std::cout << "DiamondTrap constructor called and variables initialized." << std::endl;
-	return ;
+	_name = name;
+    FragTrap::_health = 100;
+    FragTrap::_attack = 30;
+    ScavTrap::_energy = 50;
+	std::cout << "DiamondTrap: " << name << " was constructed" << std::endl;
+	// std::cout << "DiamondTrap-name: " << name << std::endl;
+	// std::cout << "DiamondTrap-_health: " << _health << " should be " << "100" << std::endl;
+	// std::cout << "DiamondTrap-_energy: " << _energy << " should be " << "50" << std::endl;
+	// std::cout << "DiamondTrap-_attack: " << _attack << " should be " << "30" << std::endl;
 }
 
-// DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), FragTrap(name), ScavTrap(name)
-// {
-// 	FragTrap ft("tmp1");
-//     ScavTrap st("tmp2");
-    
-//     _name = name;
-//     // _health = ft.getHealth();
-//     // _energy = st.getEnergy();
-//     _attack = ft._attack;
-// 	// _name = name;
-// 	// _health = FragTrap::_health;
-//     // _energy = ScavTrap::_energy;
-//     // _attack = FragTrap::_attack;
-// 	// _health = FragTrap::_health; //FT: 100   ST: 100
-// 	// _energy = ScavTrap::_energy; //FT: 100   ST: 50
-// 	// _attack = FragTrap::getAttack(); //FT: 30    ST: 20
-// 	std::cout << "DiamondTrap: " << name << " was constructed" << std::endl;
-// 	std::cout << "DiamondTrap-name: " << name << std::endl;
-// 	std::cout << "DiamondTrap-_health: " << _health << " should be " << FragTrap::_health << std::endl;
-// 	std::cout << "DiamondTrap-_energy: " << _energy << " should be " << ScavTrap::_energy << std::endl;
-// 	std::cout << "DiamondTrap-_attack: " << _attack << " should be " << FragTrap::_attack << std::endl;
-// }
+DiamondTrap::DiamondTrap(const DiamondTrap& to_copy_from) : ClapTrap(to_copy_from._name + "_clap_name"), FragTrap(to_copy_from._name), ScavTrap(to_copy_from._name)
+{
+	this->_name = to_copy_from._name;
+}
+
+
+DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other)
+{
+	if(this == &other)
+		return(*this);
+	_name = other._name;
+	ClapTrap::operator=(other);
+	return(*this);
+}
 
 void DiamondTrap::attack(const std::string& target)
 {
 	ScavTrap::attack(target);
+}
+
+void DiamondTrap::whoAmI()
+{
+	std::cout << "My name is: " << _name << " and my clap name is: " << ClapTrap::_name << std::endl;
 }
 
 DiamondTrap::~DiamondTrap()

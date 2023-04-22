@@ -20,6 +20,19 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 	std::cout << "ScavTrap: " << name << " was constructed" << std::endl;
 }
 
+ScavTrap::ScavTrap(const ScavTrap& to_copy_from) : ClapTrap(to_copy_from._name)
+{
+	this->_name = to_copy_from._name;
+}
+
+ScavTrap& ScavTrap::operator=(const ScavTrap& other) 
+{
+	if(this == &other)
+		return(*this);
+	ClapTrap::operator=(other);
+	return(*this);
+}
+
 void ScavTrap::attack(const std::string& target)
 {
 	if(!_health)

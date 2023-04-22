@@ -34,5 +34,13 @@ int	main()
 	// c.beRepaired(3);
 
 	DiamondTrap d("Jhon");
+	DiamondTrap e("Bob");
+	// DiamondTrap e(d);
+	// d.attack("bad guy");
+	d.whoAmI();
+	e.whoAmI();
+	e = d;
+	e.whoAmI();
+
 	return (0);
 }

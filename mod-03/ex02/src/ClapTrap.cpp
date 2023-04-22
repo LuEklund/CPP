@@ -16,6 +16,23 @@ ClapTrap::ClapTrap(std::string name) : _name(name), _health(10), _energy(10), _a
 	std::cout << "ClapTrap: " << name << " was constructed" << std::endl;
 }
 
+ClapTrap::ClapTrap(const ClapTrap& to_copy_from)
+{
+	*this = to_copy_from;
+}
+
+
+ClapTrap& ClapTrap::operator=(const ClapTrap& other)
+{
+	if(this == &other)
+		return(*this);
+	_name = other._name;
+	_health = other._health;
+	_energy = other._energy;
+	_attack = other._attack;
+	return(*this);
+}
+
 void ClapTrap::attack(const std::string& target)
 {
 	if(!isWorking())

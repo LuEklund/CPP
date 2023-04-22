@@ -18,10 +18,10 @@ class FragTrap : virtual public ClapTrap
 private:
 	
 public:
-	FragTrap(void);
 	FragTrap(std::string name);
+	FragTrap(const FragTrap& other);
+	FragTrap& operator=(const FragTrap &);
 	void highFivesGuys(void);
-	unsigned int getAttack() const { return _attack; }
 	~FragTrap();
 };
 

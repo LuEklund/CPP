@@ -19,6 +19,19 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name)
 	std::cout << "FragTrap: " << name << " was constructed" << std::endl;
 }
 
+FragTrap::FragTrap(const FragTrap& to_copy_from) : ClapTrap(to_copy_from._name)
+{
+	this->_name = to_copy_from._name;
+}
+
+FragTrap& FragTrap::operator=(const FragTrap& other) 
+{
+	if(this == &other)
+		return(*this);
+	ClapTrap::operator=(other);
+	return(*this);
+}
+
 void FragTrap::highFivesGuys(void)
 {
 	std::cout << "FragTrap: " << _name << " sends out a High Five! :D, Hopefully someone responded..." << std::endl;
