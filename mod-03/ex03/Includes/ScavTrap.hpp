@@ -18,6 +18,7 @@ class ScavTrap : virtual public ClapTrap
 private:
 
 public:
+	ScavTrap(std::string name, int energy);
 	ScavTrap(std::string name);
 	ScavTrap(const ScavTrap& other);
 	ScavTrap& operator=(const ScavTrap &);

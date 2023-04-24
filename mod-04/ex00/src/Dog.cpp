@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.hpp                                       :+:      :+:    :+:   */
+/*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leklund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 08:13:13 by leklund           #+#    #+#             */
-/*   Updated: 2023/04/21 08:13:15 by leklund          ###   ########.fr       */
+/*   Created: 2023/04/23 07:40:53 by leklund           #+#    #+#             */
+/*   Updated: 2023/04/23 07:40:54 by leklund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef FRAGTRAP_HPP
-# define FRAGTRAP_HPP
-# include "ClapTrap.hpp"
+#include "Dog.hpp"
 
-class FragTrap : virtual public ClapTrap
+Dog::Dog()
 {
-private:
-	
-public:
-	FragTrap(std::string name, int health, int attack);
-	FragTrap(std::string name);
-	FragTrap(const FragTrap& other);
-	FragTrap& operator=(const FragTrap &);
-	void highFivesGuys(void);
-	~FragTrap();
-};
+	type = "Dog";
+	std::cout << type << " class was constructed" << std::endl;
+}
 
+void Dog::makeSound() const
+{
+	std::cout << "this is Dog sound" << std::endl;
+}
 
-#endif
+Dog::~Dog()
+{
+	std::cout << "Dog class was destroyed" << std::endl;
+
+}

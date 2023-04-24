@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.hpp                                       :+:      :+:    :+:   */
+/*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leklund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 08:13:13 by leklund           #+#    #+#             */
-/*   Updated: 2023/04/21 08:13:15 by leklund          ###   ########.fr       */
+/*   Created: 2023/04/23 07:40:39 by leklund           #+#    #+#             */
+/*   Updated: 2023/04/23 07:40:41 by leklund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef FRAGTRAP_HPP
-# define FRAGTRAP_HPP
-# include "ClapTrap.hpp"
+#include "Cat.hpp"
 
-class FragTrap : virtual public ClapTrap
+Cat::Cat()
 {
-private:
-	
-public:
-	FragTrap(std::string name, int health, int attack);
-	FragTrap(std::string name);
-	FragTrap(const FragTrap& other);
-	FragTrap& operator=(const FragTrap &);
-	void highFivesGuys(void);
-	~FragTrap();
-};
+	type = "Cat";
+	std::cout << type << " class was constructed" << std::endl;
+}
 
+void Cat::makeSound() const
+{
+	std::cout << "this is Cat sound" << std::endl;
+}
 
-#endif
+Cat::~Cat()
+{
+	std::cout << "Cat class was destroyed" << std::endl;
+
+}

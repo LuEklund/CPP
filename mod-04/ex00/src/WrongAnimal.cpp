@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.hpp                                       :+:      :+:    :+:   */
+/*   WrongAnimal.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leklund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 08:13:13 by leklund           #+#    #+#             */
-/*   Updated: 2023/04/21 08:13:15 by leklund          ###   ########.fr       */
+/*   Created: 2023/04/23 08:20:16 by leklund           #+#    #+#             */
+/*   Updated: 2023/04/23 08:20:18 by leklund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef FRAGTRAP_HPP
-# define FRAGTRAP_HPP
-# include "ClapTrap.hpp"
+#include "WrongAnimal.hpp"
 
-class FragTrap : virtual public ClapTrap
+WrongAnimal::WrongAnimal()
 {
-private:
-	
-public:
-	FragTrap(std::string name, int health, int attack);
-	FragTrap(std::string name);
-	FragTrap(const FragTrap& other);
-	FragTrap& operator=(const FragTrap &);
-	void highFivesGuys(void);
-	~FragTrap();
-};
+	std::cout << "WrongAnimal was constructed" << std::endl;
+}
 
+std::string WrongAnimal::getType() const
+{
+	return (type);
+}
 
-#endif
+void WrongAnimal::makeSound() const
+{
+	std::cout << "this is WrongAnimal sound" << std::endl;
+}
+
+WrongAnimal::~WrongAnimal()
+{
+	std::cout << "WrongAnimal was Destroyed" << std::endl;
+
+}

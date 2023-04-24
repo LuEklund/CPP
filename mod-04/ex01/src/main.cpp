@@ -17,33 +17,28 @@
 int main()
 {
 	std::cout << "==================================================" << std::endl;
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
+	Animal *array[10];
+	int i = 0;
+	while(i < 10)
+	{
+	std::cout << "---------=[new Animal]+---------" << std::endl;
+
+		if(i < 5)
+			array[i] = new Cat();
+		else
+			array[i] = new Dog();
+		i++;
+	}
 	std::cout << "--------------------------------------------------" << std::endl;
+	i = 0;
 
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	i->makeSound(); //will output the cat sound!
-	j->makeSound();
-	meta->makeSound();
-
-	std::cout << "--------------------------------------------------" << std::endl;
-
-	delete meta;
-	delete j;
-	delete i;
+	while(i < 10)
+	{
+		std::cout << "---------=[remove Animal]+---------" << std::endl;
+		delete array[i];
+		i++;
+	}
 	std::cout << "==================================================" << std::endl;
-	std::cout << "==================================================" << std::endl;
-	const WrongAnimal* nCat = new WrongCat();
-	std::cout << "--------------------------------------------------" << std::endl;
 
-	std::cout << nCat->getType() << " " << std::endl;
-	nCat->makeSound(); //will output the cat sound!
-
-	std::cout << "--------------------------------------------------" << std::endl;
-
-	delete nCat;
-	std::cout << "==================================================" << std::endl;
 	return (0);
 }

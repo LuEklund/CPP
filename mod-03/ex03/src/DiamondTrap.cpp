@@ -11,17 +11,14 @@
 /* ************************************************************************** */
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), FragTrap(name), ScavTrap(name)
+DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), FragTrap(name, 100, 30), ScavTrap(name, 50)
 {
 	_name = name;
-    FragTrap::_health = 100;
-    FragTrap::_attack = 30;
-    ScavTrap::_energy = 50;
 	std::cout << "DiamondTrap: " << name << " was constructed" << std::endl;
 	// std::cout << "DiamondTrap-name: " << name << std::endl;
-	// std::cout << "DiamondTrap-_health: " << _health << " should be " << "100" << std::endl;
-	// std::cout << "DiamondTrap-_energy: " << _energy << " should be " << "50" << std::endl;
-	// std::cout << "DiamondTrap-_attack: " << _attack << " should be " << "30" << std::endl;
+// 	std::cout << "DiamondTrap-_health: " << _health << " should be " << "100" << std::endl;
+// 	std::cout << "DiamondTrap-_energy: " << _energy << " should be " << "50" << std::endl;
+// 	std::cout << "DiamondTrap-_attack: " << _attack << " should be " << "30" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap& to_copy_from) : ClapTrap(to_copy_from._name + "_clap_name"), FragTrap(to_copy_from._name), ScavTrap(to_copy_from._name)

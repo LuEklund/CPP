@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.hpp                                       :+:      :+:    :+:   */
+/*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leklund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 08:13:13 by leklund           #+#    #+#             */
-/*   Updated: 2023/04/21 08:13:15 by leklund          ###   ########.fr       */
+/*   Created: 2023/04/23 07:24:56 by leklund           #+#    #+#             */
+/*   Updated: 2023/04/23 07:24:57 by leklund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef FRAGTRAP_HPP
-# define FRAGTRAP_HPP
-# include "ClapTrap.hpp"
+#include "Animal.hpp"
 
-class FragTrap : virtual public ClapTrap
+Animal::Animal()
 {
-private:
-	
-public:
-	FragTrap(std::string name, int health, int attack);
-	FragTrap(std::string name);
-	FragTrap(const FragTrap& other);
-	FragTrap& operator=(const FragTrap &);
-	void highFivesGuys(void);
-	~FragTrap();
-};
+	std::cout << "Animal class was constructed" << std::endl;
+}
 
+std::string Animal::getType() const
+{
+	return (type);
+}
 
-#endif
+void Animal::makeSound() const
+{
+	std::cout << "this is Animal sound" << std::endl;
+}
+
+Animal::~Animal()
+{
+	std::cout << "Animal class was destroyed" << std::endl;
+
+}

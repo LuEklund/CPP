@@ -11,6 +11,13 @@
 /* ************************************************************************** */
 #include "ScavTrap.hpp"
 
+ScavTrap::ScavTrap(std::string name, int energy) : ClapTrap(name)
+{
+	_energy = energy;
+	std::cout << "ScavTrap: " << name << " was constructed" << std::endl;
+}
+
+
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
 	_health = 100;
