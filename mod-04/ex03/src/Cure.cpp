@@ -1,46 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*   Cure.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leklund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/23 07:24:56 by leklund           #+#    #+#             */
-/*   Updated: 2023/04/23 07:24:57 by leklund          ###   ########.fr       */
+/*   Created: 2023/04/24 11:05:09 by leklund           #+#    #+#             */
+/*   Updated: 2023/04/24 11:05:11 by leklund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "Animal.hpp"
-
-Animal::Animal()
+#include "Cure.hpp"
+Cure::Cure() : AMateria("cure")
 {
-	std::cout << "Animal class was constructed" << std::endl;
+	std::cout << "Cure class was constructed" << std::endl;
 }
 
-Animal::Animal(const Animal& to_copy_from)
+Cure::Cure(const Cure& to_copy_from)
 {
 	*this = to_copy_from;
 }
 
-Animal& Animal::operator=(const Animal& other) 
+Cure& Cure::operator=(const Cure& other) 
 {
 	if(this == &other)
 		return(*this);
-	type = other.type;
+	AMateria::operator=(other);
 	return(*this);
 }
 
-std::string Animal::getType() const
+void Cure::use(ICharacter& target)
 {
-	return (type);
+	std::cout << "* heals " << target.getName() << "’s wounds *" << std::endl;
+
 }
 
-void Animal::makeSound() const
+AMateria* Cure::clone() const
 {
-	std::cout << "this is Animal sound" << std::endl;
+	return new Cure(*this);
 }
 
-Animal::~Animal()
+Cure::~Cure()
 {
-	std::cout << "Animal class was destroyed" << std::endl;
+	std::cout << "Cure class was Destroyed" << std::endl;
 
 }

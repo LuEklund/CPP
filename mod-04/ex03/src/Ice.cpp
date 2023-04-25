@@ -1,46 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*   Ice.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leklund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/23 07:24:56 by leklund           #+#    #+#             */
-/*   Updated: 2023/04/23 07:24:57 by leklund          ###   ########.fr       */
+/*   Created: 2023/04/24 11:04:57 by leklund           #+#    #+#             */
+/*   Updated: 2023/04/24 11:04:59 by leklund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "Animal.hpp"
+#include "Ice.hpp"
 
-Animal::Animal()
+Ice::Ice() : AMateria("ice")
 {
-	std::cout << "Animal class was constructed" << std::endl;
+	std::cout << "Ice class was constructed type=" << _type << std::endl;
+
 }
 
-Animal::Animal(const Animal& to_copy_from)
+Ice::Ice(const Ice& to_copy_from)
 {
 	*this = to_copy_from;
 }
 
-Animal& Animal::operator=(const Animal& other) 
+Ice& Ice::operator=(const Ice& other) 
 {
 	if(this == &other)
 		return(*this);
-	type = other.type;
+	AMateria::operator=(other);
 	return(*this);
 }
 
-std::string Animal::getType() const
+void Ice::use(ICharacter& target)
 {
-	return (type);
+	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }
 
-void Animal::makeSound() const
+AMateria* Ice::clone() const
 {
-	std::cout << "this is Animal sound" << std::endl;
+	return new Ice(*this);
 }
 
-Animal::~Animal()
+Ice::~Ice()
 {
-	std::cout << "Animal class was destroyed" << std::endl;
+	std::cout << "Ice class was Destroyed" << std::endl;
 
 }
