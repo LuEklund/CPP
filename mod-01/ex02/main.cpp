@@ -19,19 +19,11 @@ int	main()
 	std::string& stringREF = myString;
 
 	std::cout << &myString << std::endl;
-	std::cout << &stringPTR << std::endl;
+	std::cout << stringPTR << std::endl;
 	std::cout << &stringREF << std::endl;
 
 	std::cout << myString << std::endl;
-	std::cout << stringPTR << std::endl;
+	std::cout << *stringPTR << std::endl;
 	std::cout << stringREF << std::endl;
 	return (0);
 }
-
-// 0x7ffeee1277c0 norm
-// 0x7ffeee1277b8 *
-// 0x7ffeee1277c0 &
-
-// HI THIS IS BRAIN
-// 0x7ffeee1277c0
-// HI THIS IS BRAIN

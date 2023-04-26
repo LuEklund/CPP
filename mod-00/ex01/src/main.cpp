@@ -20,19 +20,11 @@ int main()
 
 	std::string buf;
 
+	std::cout << "PhoneBook: use ADD SEARCH or EXIT" << std::endl;
 	while(42)
 	{
-		std::cout << "PhoneBook: use ADD SEARCH or EXIT\n";
 		if(!(std::getline(std::cin, buf)))
-		{
-			std::cout << "Great you broke it >:(\n";
 			break ;
-		}
-		if(buf.length() >= 7)
-		{
-			std::cout << "Invalid command\n";
-			continue ;
-		}
 		else if (!strncmp(buf.c_str(), "ADD", 4))
 			phonebook.addContact();
 		else if(!strncmp(buf.c_str(), "SEARCH", 7))
@@ -41,9 +33,7 @@ int main()
 			break ;
 		else if (buf.length() > 0)
 			std::cout << "Invalid command\n";
-		while (std::cin.get() != '\n') {
-        }
-        std::cin.clear();
+
 	}
 	return (0);
 }

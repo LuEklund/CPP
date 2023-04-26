@@ -2,8 +2,7 @@ NAME = phonebook
 
 FLAGS = -Wall -Werror -Wextra -I Includes -std=c++98
 
-HEADER = Includes/Contact.hpp Includes/PhoneBook.hpp
-SRC = main.cpp ContactClass.cpp PhoneBookClass.cpp
+SRC = main.cpp Contact.cpp PhoneBook.cpp
 
 SRC_DIR = src/
 OBJ_DIR = obj/

@@ -12,31 +12,46 @@
 #include "checkLine.hpp"
 #include <fstream>
 
-checkLine::checkLine(std::string fileName,
-						std::string str_replace,
-						std::string new_str,
-						std::string newFilename):_fileName(fileName),_str_replace(str_replace), _new_str(new_str), _newFilename(newFilename)
+checkLine::checkLine(const std::string& fileName,
+						const std::string& str_replace,
+						const std::string& new_str):_fileName(fileName),_str_replace(str_replace), _new_str(new_str), _newFilename(fileName + ".replace"){}
+
+void checkLine::processFile()
 {
-	this->len = str_replace.length();
+	std::ifstream inputFile(_fileName);
+	std::ofstream outputFile(_newFilename);
+
+	if (!inputFile.is_open()) {
+		std::cerr << "Error opening input file: " << _fileName << std::endl;
+		return;
+	}
+	if (!outputFile.is_open()) {
+		std::cerr << "Error opening output file: " << _newFilename << std::endl;
+		inputFile.close();
+		return;
+	}
+
+	std::string line;
+	while (std::getline(inputFile, line)) {
+		outputFile << write_line(line) << std::endl;
+	}
+
+	inputFile.close();
+	outputFile.close();
 }
 
-void	checkLine::write_line(std::string line, std::ofstream& newFile)
+std::string checkLine::write_line(std::string& line)
 {
-	int i = 0;
-	while(line.length() && line[i] != '\0')
-	{
-		if(!strncmp(line.c_str() + i, _str_replace.c_str(), len))
-		{
-			i += len;
-			newFile << _new_str;
-		}
-		else
-		{
-			newFile << line[i];
-			i++;
-		}
-	}
-	//DO YOU ALLWAYS NEED NEWLINE?????
-	newFile << "\n";
+	std::string result;
+        size_t pos = 0, lastPos = 0;
+
+        while ((pos = line.find(_str_replace, lastPos)) != std::string::npos) {
+            result += line.substr(lastPos, pos - lastPos);
+            result += _new_str;
+            lastPos = pos + _str_replace.length();
+        }
+        result += line.substr(lastPos);
+
+        return result;
 
 }

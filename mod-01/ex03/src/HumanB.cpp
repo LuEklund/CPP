@@ -12,13 +12,19 @@
 # include "HumanB.hpp"
 # include <iostream>
 
-HumanB::HumanB(std::string name)
+HumanB::HumanB(std::string name) : _name(name)
 {
-	this->_name = name;
+	std::cout << name << ": HumanB was constructed" << std::endl;
+
 }
 
 void	HumanB::attack()
 {
+	if(_wep == nullptr)
+	{
+		std::cout << _name << " attacks with their nullpointer" << std::endl;
+		return ;
+	}
 	std::cout << _name << " attacks with their " << _wep->getType() << std::endl;
 }
 

@@ -13,17 +13,16 @@
 #include <iostream>
 
 
-PhoneBook::PhoneBook()
-{
-	next = 0;
-}
+PhoneBook::PhoneBook() : next(0)
+{}
+
 PhoneBook::~PhoneBook()
-{
-}
+{}
 
 int	addField(std::string &field)
 {
-	if(!(std::cin >> field))
+	std::cin.ignore(field.length(), '\n');
+	if(!(std::getline(std::cin , field)))
 		return (1);
 	return (0);
 }
@@ -47,6 +46,11 @@ int	PhoneBook::addContact()
 	std::cout << "Darkest Secret: ";
 	addField(Secret);
 
+	if(!(fName.length() && lName.length() && Nname.length() && Number.length() && Secret.length()))
+	{
+		std::cout << "ADD FAILED\n";
+		return (1);
+	}
 	contacts[next].update(fName, lName, Nname, Number, Secret);
 	next++;
 	if(next >= 8)

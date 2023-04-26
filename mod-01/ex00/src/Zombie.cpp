@@ -16,9 +16,13 @@ void Zombie::announce( void )
 	std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
 
-Zombie::Zombie(std::string name) : name(name){}
+Zombie::Zombie(std::string name) : name(name)
+{
+	std::cout << name << ": was constructed" << std::endl;
+	announce();
+}
 
 Zombie::~Zombie()
 {
-	this->announce();
+	std::cout << name << ": was destroyed" << std::endl;
 }

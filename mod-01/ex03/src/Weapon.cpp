@@ -12,19 +12,21 @@
 #include "Weapon.hpp"
 # include <iostream>
 
-const	std::string Weapon::getType(void)
+const	std::string &Weapon::getType(void)
 {
 	return (_type);
 }
 
 void	Weapon::setType(std::string type)
 {
+	
 	this->_type = type;
 }
 
-Weapon::Weapon(std::string type)
+Weapon::Weapon(std::string type) : _type(type)
 {
-	Weapon::setType(type);
+	std::cout << type << ": Weapon was constructed" << std::endl;
+
 }
 
 Weapon::~Weapon()

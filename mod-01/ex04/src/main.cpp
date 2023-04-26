@@ -16,40 +16,16 @@
 int	main(int argc, char **argv)
 {
 	if(argc != 4
-		|| !argv[0] || !argv[0][0]
 		|| !argv[1] || !argv[1][0]
 		|| !argv[2] || !argv[2][0]
 		|| !argv[3] || !argv[3][0])
 	{
-		std::cout << "Invalid params" << std::endl;
-		return (1);
-	}
-	std::string line;
-	std::string	fileName = argv[1];
-	std::string	newFilename  = fileName + ".replace";
-	std::ofstream	newFile(newFilename);
-	if(!newFile.is_open())
-	{
-		std::cout << "file culd not be created" << std::endl;
+		std::cerr << "Usage: " << argv[0] << " <filename> <s1> <s2>" << std::endl;
 		return (1);
 	}
 
-	std::ifstream file(fileName);
-	if(!file.is_open())
-	{
-		std::cout << "file culd not be opened" << std::endl;
-		newFile.close();
-		return (1);
-	}
+	checkLine checkTheLine(argv[1], argv[2] ,argv[3]);
+	checkTheLine.processFile();
 
-	checkLine checkTheLine(fileName, argv[2] ,argv[3], newFilename);
-	while(std::getline(file, line))
-	{
-		//DO YOU ALLWAYS NEED NEWLINE?????
-		checkTheLine.write_line(line, newFile);
-	}
-
-	file.close();
-	newFile.close();
 	return(0);
 }

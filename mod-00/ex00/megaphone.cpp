@@ -16,7 +16,6 @@ int	main(int argc, char **argv)
 	int	i;
 	int	stringIndex;
 	
-	(void) argc;
 	i = 1;
 	if (argc == 1)
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
@@ -34,6 +33,8 @@ int	main(int argc, char **argv)
 			i++;
 			if (argv[i])
 				std::cout << " ";
+			else
+				std::cout << std::endl;
 		}
 	return (0);
 }

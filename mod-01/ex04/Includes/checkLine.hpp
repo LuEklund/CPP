@@ -20,11 +20,11 @@ private:
 	std::string _str_replace;
 	std::string _new_str;
 	std::string _newFilename;
-	int	len;
-
+	std::string write_line(std::string& line);
 public:
-	checkLine(std::string fileName, std::string new_str, std::string str_replace, std::string newFilename);
-	void	write_line(std::string line, std::ofstream&	newFile);
+	checkLine(const std::string& fileName, const std::string& new_str, const std::string& str_replace);
+	void processFile();
+
 	// ~checkLine();
 };
 

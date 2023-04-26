@@ -12,7 +12,9 @@
 # include "HumanA.hpp"
 # include <iostream>
 
-HumanA::HumanA(std::string name, Weapon& wep) : _name(name), _wep(wep){
+HumanA::HumanA(std::string name, Weapon& wep) : _name(name), _wep(wep)
+{
+	std::cout << name << ": HumanA was constructed" << std::endl;
 }
 
 void	HumanA::attack()
