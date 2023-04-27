@@ -58,19 +58,19 @@ void	Harl::complain(std::string level )
 			(this->*_functions[1])();
 			(this->*_functions[2])();
 			(this->*_functions[3])();
-			(this->*_functions[0])();
 		 break;
 		case 1:
-			(this->*_functions[0])();
 			(this->*_functions[1])();
 			(this->*_functions[2])();
+			(this->*_functions[3])();
+
 		 break;
 		case 2:
-			(this->*_functions[0])();
-			(this->*_functions[1])();
+			(this->*_functions[2])();
+			(this->*_functions[3])();
 		 break;
 		case 3:
-			(this->*_functions[0])();
+			(this->*_functions[3])();
 		 break;
 		default:
 			std::cout << "Invalid level: " << level << std::endl;
