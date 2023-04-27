@@ -48,11 +48,6 @@ bool bsp( Point const a, Point const b, Point const c, Point const point)
 	Fixed area4 = area(a, b, c);
 	if(area1 == -1 || area2 == - 1 || area3 == -1 || area4 == -1)
 		return(false);
-	std::cout << "area1: " << area1 << std::endl;
-	std::cout << "area2: " << area2 << std::endl;
-	std::cout << "area3: " << area3 << std::endl;
-	std::cout << "area4: " << area4 << std::endl;
-
 	return (area1 + area2 + area3 == area4);
 
 }

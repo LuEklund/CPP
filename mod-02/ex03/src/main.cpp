@@ -13,9 +13,9 @@
 
 int main( void ) {
 	Point a(0, 0);
-	Point b(4, 0);
-	Point c(2, 3);
-	Point p(2, 3);
+	Point b(40, 0);
+	Point c(20, 30);
+	Point p(20, 29);
 	if (bsp(a, b, c, p)) {
         std::cout << "Point P is inside the triangle ABC" << std::endl;
     } else {

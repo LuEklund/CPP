@@ -32,15 +32,15 @@ Fixed::Fixed(const float floater) : fixed_point(std::roundf(floater * (1 << bit)
 
 Fixed::Fixed(const Fixed &to_copy_from)
 {
-	this->fixed_point = to_copy_from.getRawBits();
 	std::cout << "Copy constructor called" << std::endl;
+	*this = to_copy_from;
 }
 
 Fixed& Fixed::operator=(const Fixed& other)
 {
+	std::cout << "Copy assignment operator called" << std::endl;
 	if (this == &other)
 		return (*this);
-	std::cout << "Copy assignment operator called" << std::endl;
 	fixed_point = other.getRawBits();
 	return (*this);
 }
@@ -62,7 +62,6 @@ float Fixed::toFloat( void ) const
 
 int Fixed::getRawBits( void ) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
 	return(fixed_point);
 }
 
