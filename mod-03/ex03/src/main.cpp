@@ -37,6 +37,8 @@ int	main()
 	// DiamondTrap e("Bob");
 	// DiamondTrap e(d);
 	// d.attack("bad guy");
+	d.highFivesGuys();
+	d.guardGate();
 	d.whoAmI();
 	// e.whoAmI();
 	// e = d;

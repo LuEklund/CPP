@@ -18,5 +18,6 @@ int	main()
 	a.attack("badGuy");
 	a.takeDamage(3);
 	a.beRepaired(4);
+	a.beRepaired(4);
 	return (0);
 }

@@ -35,12 +35,12 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& other)
 
 void ScavTrap::attack(const std::string& target)
 {
-	if(!_health)
+	if(_health <= 0)
 	{
 		std::cout << "ScavTrap: " << _name << " is dieded, can not attack!" << std::endl;
 		return ;
 	}
-	if(!_energy)
+	if(_energy <= 0)
 	{
 		std::cout << "ScavTrap: " << _name << " is tired, can not attack!" << std::endl;
 		return ;
