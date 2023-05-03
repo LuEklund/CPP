@@ -26,19 +26,19 @@ Harl::Harl()
 
 void	Harl::debug( void )
 {
-	std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger. I really do!" << std::endl;
+	std::cout << "1 = I love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger. I really do!" << std::endl;
 }
 void	Harl::info( void )
 {
-	std::cout << "I cannot believe adding extra bacon costs more money. You didn’t put enough bacon in my burger! If you did, I wouldn’t be asking for more!" << std::endl;
+	std::cout << "2 = I cannot believe adding extra bacon costs more money. You didn’t put enough bacon in my burger! If you did, I wouldn’t be asking for more!" << std::endl;
 }
 void	Harl::warning( void )
 {
-	std::cout << "I think I deserve to have some extra bacon for free. I’ve been coming for years whereas you started working here since last month." << std::endl;
+	std::cout << "3 = I think I deserve to have some extra bacon for free. I’ve been coming for years whereas you started working here since last month." << std::endl;
 }
 void	Harl::error( void )
 {
-	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
+	std::cout << "4 =This is unacceptable! I want to speak to the manager now." << std::endl;
 }
 
 void	Harl::complain(std::string level )
@@ -55,20 +55,10 @@ void	Harl::complain(std::string level )
 	{
 		case 0:
 			(this->*_functions[0])();
-			(this->*_functions[1])();
-			(this->*_functions[2])();
-			(this->*_functions[3])();
-		 break;
 		case 1:
 			(this->*_functions[1])();
-			(this->*_functions[2])();
-			(this->*_functions[3])();
-
-		 break;
 		case 2:
 			(this->*_functions[2])();
-			(this->*_functions[3])();
-		 break;
 		case 3:
 			(this->*_functions[3])();
 		 break;
