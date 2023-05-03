@@ -22,6 +22,7 @@ MateriaSource::MateriaSource()
 	std::cout << "MateriaSource class was constructed" << std::endl;
 }
 
+//may see this one as well
 MateriaSource::MateriaSource(const MateriaSource& to_copy_from)
 {
 	*this = to_copy_from;
@@ -40,7 +41,7 @@ void MateriaSource::learnMateria(AMateria* toSave)
 	int i = 0;
 	while(i < 4)
 	{
-		std::cout << "_materias[" << i << "] = " << std::endl;
+		// std::cout << "_materias[" << i << "] = " << std::endl;
 		// std::cout << "_materias[" << i << "] = " << _materias[i]->getType() << std::endl;
 		if(_materias[i] == nullptr)
 		{

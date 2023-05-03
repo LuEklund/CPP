@@ -17,6 +17,19 @@ WrongCat::WrongCat()
 	std::cout << type << " class was constructed" << std::endl;
 }
 
+WrongCat::WrongCat(const WrongCat& to_copy_from)
+{
+	*this = to_copy_from;
+}
+
+WrongCat& WrongCat::operator=(const WrongCat& other)
+{
+	if(this == &other)
+		return(*this);
+	type = other.type;
+	return(*this);
+}
+
 WrongCat::~WrongCat()
 {
 	std::cout << "WrongCat was Destroyed" << std::endl;

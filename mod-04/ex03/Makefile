@@ -1,6 +1,7 @@
 NAME = run
 
-FLAGS = -Wall -Werror -Wextra -I Includes -std=c++98
+FLAGS = -Wall -Werror -Wextra -I Includes -std=c++98 
+DEBUG = -g -fsanitize=address
 
 SRC = main.cpp \
 		AMateria.cpp \

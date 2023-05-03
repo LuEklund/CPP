@@ -17,6 +17,19 @@ Dog::Dog()
 	std::cout << type << " class was constructed" << std::endl;
 }
 
+Dog::Dog(const Dog& to_copy_from)
+{
+	*this = to_copy_from;
+}
+
+Dog& Dog::operator=(const Dog& other)
+{
+	if(this == &other)
+		return(*this);
+	type = other.type;
+	return(*this);
+}
+
 void Dog::makeSound() const
 {
 	std::cout << "this is Dog sound" << std::endl;

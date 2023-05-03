@@ -24,10 +24,9 @@ Brain::Brain(const Brain& to_copy_from)
 
 Brain& Brain::operator=(const Brain& other) 
 {
-	std::cout << "CPYYYYYYY" << std::endl;
+	std::cout << "COPY brain called" << std::endl;
 	if(this == &other)
 		return(*this);
-	std::cout << "CPYYYYYYY" << std::endl;
 	int i = 0;
 	while(other.ideas[i].size() && i < 100)
 	{
@@ -37,6 +36,26 @@ Brain& Brain::operator=(const Brain& other)
 	}
 	
 	return(*this);
+}
+
+void Brain::setIdea(size_t index, std::string idea)
+{
+	if(index < 100 && index >= 0)
+	{
+		ideas[index] = idea;
+	}
+	else
+		std::cout << "Dont have the Brain capacitty for this" << std::endl;
+}
+
+std::string Brain::getIdea(size_t index)
+{
+	if(index < 100 && index >= 0)
+	{
+		if(ideas[index].length())
+			return(ideas[index]);
+	}
+	return("No Idea");
 }
 
 Brain::~Brain()

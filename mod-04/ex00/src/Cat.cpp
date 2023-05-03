@@ -17,6 +17,19 @@ Cat::Cat()
 	std::cout << type << " class was constructed" << std::endl;
 }
 
+Cat::Cat(const Cat& to_copy_from)
+{
+	*this = to_copy_from;
+}
+
+Cat& Cat::operator=(const Cat& other)
+{
+	if(this == &other)
+		return(*this);
+	type = other.type;
+	return(*this);
+}
+
 void Cat::makeSound() const
 {
 	std::cout << "this is Cat sound" << std::endl;

@@ -19,7 +19,9 @@ private:
 	
 public:
 	WrongCat();
-	~WrongCat();
+	WrongCat(const WrongCat& other);
+	WrongCat& operator=(const WrongCat &);
+	virtual ~WrongCat();
 };
 
 

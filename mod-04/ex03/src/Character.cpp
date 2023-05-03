@@ -33,8 +33,53 @@ Character::Character(std::string name)
 	std::cout << name <<" Character class was constructed" << std::endl;
 }
 
+
+
+// Character::Character(const Character& other)
+// {
+// 	(void) other;
+// 	// std::cout << "Character class copy constructor was called" << std::endl;
+
+// 	// _name = other._name;
+// 	// for (int i = 0; i < 4; i++) {
+// 	// 	if (other._materias[i] != nullptr) {
+// 	// 		_materias[i] = other._materias[i]->clone();
+// 	// 	} else {
+// 	// 		_materias[i] = nullptr;
+// 	// 	}
+// 	// }
+// }
+
+// Character& Character::operator=(const Character& other)
+// {
+// 	if (this != &other) {
+	
+// 		_name = other._name;
+
+// 		std::cout << "Character class copy assignment operator was called" << std::endl;
+
+// 		for (int i = 0; i < 4; i++) {
+// 			if (other._materias[i] != nullptr) {
+// 				_materias[i] = other._materias[i]->clone();
+// 			} else {
+// 				 _materias[i] = nullptr;
+// 			}
+// 		}
+// 	}
+// 	return *this;
+// 	return *this;
+// }
+
+//CHECK into this maybe aye?
 Character::Character(const Character& to_copy_from)
 {
+
+	int i = 0;
+	while(i < 4)
+	{
+		_materias[i] = nullptr;
+		i++;
+	}
 	*this = to_copy_from;
 }
 
@@ -43,17 +88,15 @@ Character& Character::operator=(const Character& other)
 	if(this == &other)
 		return(*this);
 	_name = other._name;
-	std::cout << _name <<" = Character class was constructed" << std::endl;
-	// int i = 0;
-	// while(i < 4)
-	// {
-	// 	if(other._materias[i] != nullptr)
-	// 	{
-	// 		equip(other._materias[i]->clone());
-	// 	}
-	// 	i++;
-	// }
-	std::cout << _name <<" = Character class was constructed" << std::endl;
+	int i = 0;
+	while(i < 4)
+	{
+		if(other._materias[i] != nullptr)
+		{
+			equip(other._materias[i]);
+		}
+		i++;
+	}
 	return(*this);
 }
 

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "Dog.hpp"
 
-Dog::Dog()
+Dog::Dog() : brain(nullptr)
 {
 	type = "Dog";
 	std::cout << type << " class was constructed" << std::endl;
@@ -21,17 +21,28 @@ Dog::Dog()
 
 Dog::Dog(const Dog& to_copy_from)
 {
-	*this = to_copy_from;
+	std::cout << "CPY constructor" << std::endl;
+	brain = new Brain(*to_copy_from.brain);
+	type = to_copy_from.type;
 }
 
 Dog& Dog::operator=(const Dog& other) 
 {
+	std::cout << "CPY assingment" << std::endl;
 	if(this == &other)
 		return(*this);
-	delete this->brain;
-	this->brain = new Brain(*other.brain);
+	Brain * new_brain = new Brain(*other.brain);
+	delete brain;
+	brain = new_brain;
 	type = other.type;
 	return(*this);
+
+}
+
+
+Brain& Dog::getBrain()
+{
+	return(*brain);
 }
 
 void Dog::makeSound() const

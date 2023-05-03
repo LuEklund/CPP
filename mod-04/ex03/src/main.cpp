@@ -11,13 +11,13 @@
 /* ************************************************************************** */
 #include "Cure.hpp"
 #include "Ice.hpp"
-#include "ICharacter.hpp"
 #include "Character.hpp"
 #include "IMateriaSource.hpp"
 #include "MateriaSource.hpp"
 
 int main()
 {
+	{
 	IMateriaSource* src = new MateriaSource();
 	src->learnMateria(new Ice());
 	src->learnMateria(new Cure());
@@ -33,22 +33,26 @@ int main()
 	ICharacter* bob = new Character("bob");
 	me->use(0, *bob);
 	me->use(1, *bob);
-	// me->unequip(0);
-	// me->use(0, *bob);
-	// me->unequip(0);
-	// std::cout << "=================================================" << std::endl;
-	// ICharacter* dod = new Character("dod");
-	// dod = me;
-	// std::cout << "------------------------------------------------" << std::endl;
-
-	// dod = me;
-	delete bob;
+	me->unequip(0);
+	me->use(0, *bob);
+	me->unequip(0);
+	std::cout << "------------------------------------------------" << std::endl;
 	delete me;
+	std::cout << "------------------------------------------------" << std::endl;
+	std::cout << "=================================================" << std::endl;
+	Character *me2 = new Character("me");
+	me2->equip(tmp);
+	me2->use(0, *bob);
+	Character *bob2 = new Character(*me2);
+	delete me2;
+	bob2->use(0, *bob);
+	std::cout << "=================================================" << std::endl;
+	std::cout << "------------------------------------------------" << std::endl;
+	delete bob2;
+	delete bob;
 	delete src;
-
-
-
-	// delete dod;
+	std::cout << "------------------------------------------------" << std::endl;
+	}
 
 	return(0);
 }

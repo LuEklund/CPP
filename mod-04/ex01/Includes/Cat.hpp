@@ -23,6 +23,7 @@ public:
 	Cat();
 	Cat(const Cat& other);
 	Cat& operator=(const Cat &);
+	Brain& getBrain();
 	virtual void makeSound() const;
 	virtual ~Cat();
 };

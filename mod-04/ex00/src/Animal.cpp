@@ -16,6 +16,19 @@ Animal::Animal()
 	std::cout << "Animal class was constructed" << std::endl;
 }
 
+Animal::Animal(const Animal& to_copy_from)
+{
+	*this = to_copy_from;
+}
+
+Animal& Animal::operator=(const Animal& other)
+{
+	if(this == &other)
+		return(*this);
+	type = other.type;
+	return(*this);
+}
+
 std::string Animal::getType() const
 {
 	return (type);

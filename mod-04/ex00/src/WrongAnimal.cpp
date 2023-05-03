@@ -16,6 +16,19 @@ WrongAnimal::WrongAnimal()
 	std::cout << "WrongAnimal was constructed" << std::endl;
 }
 
+WrongAnimal::WrongAnimal(const WrongAnimal& to_copy_from)
+{
+	*this = to_copy_from;
+}
+
+WrongAnimal& WrongAnimal::operator=(const WrongAnimal& other)
+{
+	if(this == &other)
+		return(*this);
+	type = other.type;
+	return(*this);
+}
+
 std::string WrongAnimal::getType() const
 {
 	return (type);
