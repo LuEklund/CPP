@@ -13,17 +13,21 @@
 # define CHARACTER_HPP
 # include "ICharacter.hpp"
 # include "AMateria.hpp"
+# include "Trash.hpp"
+
 
 class Character : public ICharacter
 {
 private:
 	std::string _name;
 	AMateria *_materias[4];
+	Trash *trash;
 public:
 	Character();
 	Character(std::string name);
 	Character(const Character& to_copy_from);
 	Character& operator=(const Character& other) ;
+	void addToTrash(AMateria* m);
 	std::string const& getName() const;
 	void equip(AMateria* m);
 	void unequip(int idx);

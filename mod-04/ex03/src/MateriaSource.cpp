@@ -66,7 +66,7 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 		// 	std::cout << _materias[i]->getType() << " ?= " << type;
 		// std::cout << std::endl;
 		if(_materias[i] != nullptr && _materias[i]->getType() == type)
-			return(_materias[i]);
+			return(_materias[i]->clone());
 		i++;
 	}
 	std::cout << " createMateria failed :(" << std::endl;
@@ -80,7 +80,7 @@ MateriaSource::~MateriaSource()
 	{
 		if(_materias[i] != nullptr)
 		{
-			// std::cout << "to delete _materias[" << i << "] = " << _materias[i]->getType() << std::endl;
+			std::cout << "to delete _materias[" << i << "] = " << _materias[i]->getType() << std::endl;
 
 			delete _materias[i];
 		}

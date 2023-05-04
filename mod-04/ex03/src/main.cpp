@@ -17,42 +17,64 @@
 
 int main()
 {
-	{
+
 	IMateriaSource* src = new MateriaSource();
 	src->learnMateria(new Ice());
-	src->learnMateria(new Cure());
-	src->learnMateria(new Cure());
-	src->learnMateria(new Cure());
 
 	ICharacter* me = new Character("me");
 	AMateria* tmp;
 	tmp = src->createMateria("ice");
 	me->equip(tmp);
-	tmp = src->createMateria("cure");
 	me->equip(tmp);
-	ICharacter* bob = new Character("bob");
-	me->use(0, *bob);
-	me->use(1, *bob);
-	me->unequip(0);
-	me->use(0, *bob);
-	me->unequip(0);
-	std::cout << "------------------------------------------------" << std::endl;
+
+	// // me->equip(tmp);
+	// // me->equip(tmp);
+	// me->unequip(0);
+	// me->unequip(1);
+	// // me->unequip(2);
+	// // me->unequip(3);
+	delete tmp;
 	delete me;
-	std::cout << "------------------------------------------------" << std::endl;
-	std::cout << "=================================================" << std::endl;
-	Character *me2 = new Character("me");
-	me2->equip(tmp);
-	me2->use(0, *bob);
-	Character *bob2 = new Character(*me2);
-	delete me2;
-	bob2->use(0, *bob);
-	std::cout << "=================================================" << std::endl;
-	std::cout << "------------------------------------------------" << std::endl;
-	delete bob2;
-	delete bob;
 	delete src;
-	std::cout << "------------------------------------------------" << std::endl;
-	}
+
+	// {
+	// IMateriaSource* src = new MateriaSource();
+	// src->learnMateria(new Ice());
+	// src->learnMateria(new Cure());
+	// src->learnMateria(new Cure());
+	// src->learnMateria(new Cure());
+
+	// ICharacter* me = new Character("me");
+	// AMateria* tmp;
+	// tmp = src->createMateria("ice");
+	// me->equip(tmp);
+	// tmp = src->createMateria("cure");
+	// me->equip(tmp);
+	// ICharacter* bob = new Character("bob");
+	// me->use(0, *bob);
+	// me->use(1, *bob);
+	// me->unequip(0);
+	// me->use(0, *bob);
+	// me->unequip(0);
+	// std::cout << "------------------------------------------------" << std::endl;
+	// delete me;
+	// std::cout << "------------------------------------------------" << std::endl;
+	// std::cout << "=================================================" << std::endl;
+	// Character *me2 = new Character("me");
+	// me2->equip(tmp);
+	// me2->use(0, *bob);
+	// me2->unequip(0);
+	// Character *bob2 = new Character(*me2);
+	// delete me2;
+	// bob2->use(0, *bob);
+	// std::cout << "=================================================" << std::endl;
+	// std::cout << "------------------------------------------------" << std::endl;
+	// delete bob2;
+	// delete bob;
+	// delete src;
+	// delete tmp;
+	// std::cout << "------------------------------------------------" << std::endl;
+	// }
 
 	return(0);
 }

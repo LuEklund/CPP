@@ -1,14 +1,15 @@
 NAME = run
 
 FLAGS = -Wall -Werror -Wextra -I Includes -std=c++98 
-DEBUG = -g -fsanitize=address
-
+DEBUG = 
+# -g -fsanitize=address
 SRC = main.cpp \
 		AMateria.cpp \
 		Ice.cpp \
 		Cure.cpp \
 		Character.cpp \
-		MateriaSource.cpp
+		MateriaSource.cpp \
+		Trash.cpp
 		
 
 OBJ_DIR = obj/
@@ -25,7 +26,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 $(NAME) : $(OBJ_DIR) $(OBJ)
-	c++ $(FLAGS) $(OBJ) -o $@
+	c++ $(FLAGS) $(DEBUG) $(OBJ) -o $@
 
 clean:
 	rm -rf $(OBJ_DIR)

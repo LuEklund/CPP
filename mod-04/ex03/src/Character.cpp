@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "Character.hpp"
 #include <iostream>
-Character::Character()
+Character::Character() : trash(nullptr)
 {
 	int i = 0;
 	while(i < 4)
@@ -21,7 +21,7 @@ Character::Character()
 	}
 }
 
-Character::Character(std::string name)
+Character::Character(std::string name) : trash(nullptr)
 {
 	int i = 0;
 	while(i < 4)
@@ -33,45 +33,8 @@ Character::Character(std::string name)
 	std::cout << name <<" Character class was constructed" << std::endl;
 }
 
-
-
-// Character::Character(const Character& other)
-// {
-// 	(void) other;
-// 	// std::cout << "Character class copy constructor was called" << std::endl;
-
-// 	// _name = other._name;
-// 	// for (int i = 0; i < 4; i++) {
-// 	// 	if (other._materias[i] != nullptr) {
-// 	// 		_materias[i] = other._materias[i]->clone();
-// 	// 	} else {
-// 	// 		_materias[i] = nullptr;
-// 	// 	}
-// 	// }
-// }
-
-// Character& Character::operator=(const Character& other)
-// {
-// 	if (this != &other) {
-	
-// 		_name = other._name;
-
-// 		std::cout << "Character class copy assignment operator was called" << std::endl;
-
-// 		for (int i = 0; i < 4; i++) {
-// 			if (other._materias[i] != nullptr) {
-// 				_materias[i] = other._materias[i]->clone();
-// 			} else {
-// 				 _materias[i] = nullptr;
-// 			}
-// 		}
-// 	}
-// 	return *this;
-// 	return *this;
-// }
-
 //CHECK into this maybe aye?
-Character::Character(const Character& to_copy_from)
+Character::Character(const Character& to_copy_from) : trash(nullptr)
 {
 
 	int i = 0;
@@ -93,11 +56,44 @@ Character& Character::operator=(const Character& other)
 	{
 		if(other._materias[i] != nullptr)
 		{
-			equip(other._materias[i]);
+			equip(other._materias[i]->clone());
 		}
 		i++;
 	}
 	return(*this);
+}
+
+void Character::addToTrash(AMateria* m)
+{
+		std::cout << "EQ" <<  std::endl;
+	if(trash == nullptr)
+	{
+		std::cout << "EQ1" <<  std::endl;
+
+		trash = new Trash(m);
+	}
+	else
+	{
+		std::cout << "EQ2" <<  std::endl;
+		Trash *tmp = trash;
+		while(tmp->Next() != nullptr)
+		{
+			if(tmp->getAmateria() == m)
+			{
+				std::cout << "Allready exists" <<  std::endl;
+				return ;
+			}
+			tmp = tmp->Next();
+		}
+		if(tmp->getAmateria() == m)
+		{
+			std::cout << "Allready exists" <<  std::endl;
+			return ;
+		}
+		tmp->setNext(new Trash(m));
+	}
+		std::cout << "EQ3" <<  std::endl;
+
 }
 
 std::string const& Character::getName() const
@@ -130,6 +126,8 @@ void Character::unequip(int idx)
 	if(idx > -1 && idx < 4 && _materias[idx] != nullptr)
 	{
 		std::cout << _name << " unequip " << _materias[idx]->getType() <<std::endl;
+		addToTrash(_materias[idx]);
+		std::cout << "BULLSHIT" <<  std::endl;
 		_materias[idx] = nullptr;
 	}
 
@@ -147,4 +145,8 @@ void Character::use(int idx, ICharacter& target)
 Character::~Character()
 {
 	std::cout << _name << " Character class was Destroyed" << std::endl;
+	if(trash != nullptr)
+	{
+		trash->freeTrash();
+	}
 }
