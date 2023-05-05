@@ -17,7 +17,7 @@ SRC_DIR = src/
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
-all : $(NAME)
+all : $(NAME) 
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.cpp
 	c++ $(FLAGS) -c $< -o $@

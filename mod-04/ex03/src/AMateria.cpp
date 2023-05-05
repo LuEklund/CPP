@@ -12,7 +12,8 @@
 #include "AMateria.hpp"
 
 AMateria::AMateria()
-{}
+{
+}
 
 AMateria::AMateria(std::string const &type)
 {
@@ -22,7 +23,7 @@ AMateria::AMateria(std::string const &type)
 
 AMateria::AMateria(const AMateria& to_copy_from)
 {
-	*this = to_copy_from;
+	_type = to_copy_from._type;
 }
 
 AMateria& AMateria::operator=(const AMateria& other) 

@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "Cure.hpp"
+
 Cure::Cure() : AMateria("cure")
 {
 	std::cout << "Cure class was constructed" << std::endl;
@@ -17,13 +18,12 @@ Cure::Cure() : AMateria("cure")
 
 Cure::Cure(const Cure& to_copy_from)
 {
-	*this = to_copy_from;
+	std::cout << "Cure copy constructed" << std::endl;
+	AMateria::operator=(to_copy_from);
 }
 
 Cure& Cure::operator=(const Cure& other) 
 {
-	if(this == &other)
-		return(*this);
 	AMateria::operator=(other);
 	return(*this);
 }

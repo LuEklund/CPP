@@ -18,13 +18,11 @@ Trash::Trash() : materia(nullptr), next(nullptr)
 
 Trash::Trash(AMateria *m) : materia(m), next(nullptr)
 {
-		std::cout << "GOOD" <<  std::endl;
 	
 }
 
 Trash::Trash(const Trash& to_copy_from)
 {
-		std::cout << "BAD" <<  std::endl;
 	materia = to_copy_from.materia;
 	next = to_copy_from.next;
 }
@@ -54,31 +52,35 @@ AMateria *Trash::getAmateria()
 }
 
 
-void Trash::freeTrash()
-{
-	std::cout << "Start freeing " <<  std::endl;
-	if(materia != nullptr)
-	{
-	std::cout << "A" <<  std::endl;
-		delete materia;
-	std::cout << "B" <<  std::endl;
+// void Trash::freeTrash()
+// {
+// 	std::cout << "Start freeing " <<  std::endl;
+// 	if(materia != nullptr)
+// 	{
+// 	std::cout << "A" <<  std::endl;
+// 		delete materia;
+// 	std::cout << "B" <<  std::endl;
 
-		Trash *tmp = this;
-	std::cout << "C" <<  std::endl;
-		while(tmp->next != nullptr)
-		{
-			std::cout << "CWHAT" <<  std::endl;
-			tmp = tmp->next;
-			std::cout << "CWHAT1" <<  std::endl;
-			delete tmp->materia;
-			std::cout << "CWHAT2" <<  std::endl;
-		}
+// 		Trash *tmp = this;
+// 	std::cout << "C" <<  std::endl;
+// 		while(tmp->next != nullptr)
+// 		{
+// 			std::cout << "CWHAT" <<  std::endl;
+// 			tmp = tmp->next;
+// 			std::cout << "CWHAT1" <<  std::endl;
+// 			delete tmp->materia;
+// 			std::cout << "CWHAT2" <<  std::endl;
+// 		}
 
-	std::cout << "D" <<  std::endl;
-	}
-}
+// 	std::cout << "D" <<  std::endl;
+// 	}
+// }
 
 Trash::~Trash()
 {
-	// freeTrash();
+	delete materia;
+	materia = nullptr;
+	delete next;
+	next = nullptr;
+
 }

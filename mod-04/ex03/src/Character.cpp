@@ -33,27 +33,31 @@ Character::Character(std::string name) : trash(nullptr)
 	std::cout << name <<" Character class was constructed" << std::endl;
 }
 
-//CHECK into this maybe aye?
 Character::Character(const Character& to_copy_from) : trash(nullptr)
 {
-
-	int i = 0;
-	while(i < 4)
+	_name = to_copy_from._name;
+	for(int i = 0; i < 4; i++)
 	{
-		_materias[i] = nullptr;
-		i++;
+		if(to_copy_from._materias[i] != nullptr)
+		{
+			equip(to_copy_from._materias[i]->clone());
+		}
+		else
+			_materias[i] = nullptr;
 	}
-	*this = to_copy_from;
 }
 
 Character& Character::operator=(const Character& other) 
 {
 	if(this == &other)
 		return(*this);
+
 	_name = other._name;
 	int i = 0;
 	while(i < 4)
 	{
+		delete _materias[i];
+		_materias[i] = nullptr;
 		if(other._materias[i] != nullptr)
 		{
 			equip(other._materias[i]->clone());
@@ -65,16 +69,12 @@ Character& Character::operator=(const Character& other)
 
 void Character::addToTrash(AMateria* m)
 {
-		std::cout << "EQ" <<  std::endl;
 	if(trash == nullptr)
 	{
-		std::cout << "EQ1" <<  std::endl;
-
 		trash = new Trash(m);
 	}
 	else
 	{
-		std::cout << "EQ2" <<  std::endl;
 		Trash *tmp = trash;
 		while(tmp->Next() != nullptr)
 		{
@@ -92,8 +92,6 @@ void Character::addToTrash(AMateria* m)
 		}
 		tmp->setNext(new Trash(m));
 	}
-		std::cout << "EQ3" <<  std::endl;
-
 }
 
 std::string const& Character::getName() const
@@ -111,6 +109,11 @@ void Character::equip(AMateria* m)
 	int i = 0;
 	while(i < 4)
 	{
+		if(_materias[i] == m)
+		{
+			std::cout << "Allready exists did not add " <<  std::endl;
+			return ;
+		}
 		if(_materias[i] == nullptr)
 		{
 			_materias[i] = m;
@@ -127,7 +130,6 @@ void Character::unequip(int idx)
 	{
 		std::cout << _name << " unequip " << _materias[idx]->getType() <<std::endl;
 		addToTrash(_materias[idx]);
-		std::cout << "BULLSHIT" <<  std::endl;
 		_materias[idx] = nullptr;
 	}
 
@@ -142,11 +144,13 @@ void Character::use(int idx, ICharacter& target)
 		std::cout << _name << " uses nothing at " << target.getName() << std::endl;
 }
 
-Character::~Character()
-{
-	std::cout << _name << " Character class was Destroyed" << std::endl;
-	if(trash != nullptr)
-	{
-		trash->freeTrash();
-	}
+Character::~Character() {
+    for(int i = 0; i < 4; i++) {
+        if(_materias[i] != nullptr) {
+            delete _materias[i];
+            _materias[i] = nullptr;
+        }
+    }
+    delete trash;
+    std::cout << _name << " Character class was Destroyed" << std::endl;
 }

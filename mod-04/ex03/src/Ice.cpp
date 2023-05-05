@@ -14,18 +14,16 @@
 Ice::Ice() : AMateria("ice")
 {
 	std::cout << "Ice class was constructed type=" << _type << std::endl;
-
 }
 
 Ice::Ice(const Ice& to_copy_from)
 {
-	*this = to_copy_from;
+	std::cout << "Ice copy constructed" << std::endl;
+	AMateria::operator=(to_copy_from);
 }
 
 Ice& Ice::operator=(const Ice& other) 
 {
-	if(this == &other)
-		return(*this);
 	AMateria::operator=(other);
 	return(*this);
 }

@@ -13,7 +13,6 @@
 # define TRASH_HPP
 # include "AMateria.hpp"
 
-// class AMateria;
 
 class Trash
 {
@@ -28,7 +27,7 @@ public:
 	Trash* Next();
 	void setNext(Trash* to_add);
 	AMateria *getAmateria();
-	void freeTrash();
+	// void freeTrash();
 	~Trash();
 };
 
