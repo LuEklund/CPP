@@ -12,30 +12,17 @@ This project is a collection of modules (00-04) from the CPP curriculum at 42. T
 
 ## Requirements
 
-- MacOS (Tested on version xx.xx)
-- Additional Dependencies: X, Y, Z (If any)
+- MacOS
 
 ## Installation
 
 To install and run the project, follow these steps:
 
-1. Clone the repository: `git clone <repository-url>`
+1. Clone the repository: `git clone https://github.com/LuEklund/CPP.git`
 2. Navigate into the cloned repository: `cd <repository-name>`
 3. Compile the project: `make`
 4. Upon successful compilation, an executable binary should be created. Run it with: `./<binary-name>`
 
-## Usage
-
-Instructions for how to use the modules...
-
-## Contributing
-
-Information on how to contribute...
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
 ## Contact
 
-If you have any questions or would like to know more about the project, feel free to reach out at [your-email@example.com](mailto:your-email@example.com).
+If you have any questions or would like to know more about the project, feel free to reach out at [luckeeklund@gmail.com](mailto:luckeeklund@gmail.com).
