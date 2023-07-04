@@ -24,7 +24,6 @@ int main()
 		AForm *b = new PresidentialPardonForm();
 		// Form *c = new RobotomyRequestForm();
 		// Form *d = new ShrubberyCreationForm();
-		std::cout << std::endl;
 
 		std::cout << "Testing" << std::endl;
 		std::cout << *a << std::endl;

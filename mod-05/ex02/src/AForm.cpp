@@ -17,9 +17,9 @@ AForm::AForm() : _name("default"), _signed(false), _reqGradeSign(1), _reqGradeEx
 	std::cout << "+ConstAForm: name:default reqGradeSign:1 reqGradeExe:1" << std::endl;
 }
 
-AForm::AForm(std::string name, int reqSign, int reqExe) : _name(name), _signed(false), _reqGradeSign(reqSign), _reqGradeExe(reqExe)
+AForm::AForm(std::string name, int reqSign, int reqExe, std::string target) : _name(name), _signed(false), _reqGradeSign(reqSign), _reqGradeExe(reqExe), _target(target)
 {
-	std::cout << "+ConstAForm1: name:" << name << " reqGradeSign:" << reqSign << " reqGradeExe:" << reqExe << std::endl;
+	std::cout << "+ConstAForm1: name:" << name << " reqGradeSign:" << reqSign << " reqGradeExe:" << reqExe << " Target:" << target << std::endl;
 	if(_reqGradeExe < 1 || _reqGradeSign < 1)
 		throw AForm::GradeTooHighException();
 	else if (_reqGradeExe > 150 || _reqGradeSign > 150)
@@ -54,19 +54,23 @@ void AForm::beSigned(Bureaucrat& bur)
 		this->_signed = true;
 }
 
-const std::string AForm::getName()
+const std::string AForm::getName() const
 {
 	return(_name);
 }
-bool AForm::getSigned()
+const std::string AForm::getTarget()
+{
+	return(_target);
+}
+bool AForm::getSigned() const
 {
 	return(_signed);
 }
-int AForm::getReqGradeSign()
+int AForm::getReqGradeSign() const
 {
 	return(_reqGradeSign);
 }
-int AForm::getReqGradeExe()
+int AForm::getReqGradeExe() const
 {
 	return(_reqGradeExe);
 }
@@ -79,11 +83,15 @@ const char* AForm::GradeTooLowException::what() const throw()
 {
 	return("AForm: Grade Too Low Exception");
 }
+const char* AForm::FormNotSignedException::what() const throw()
+{
+	return("AForm: Form Not Signed Exception");
+}
 
 std::ostream& operator<<(std::ostream& outPut, AForm& f)
 {
 	outPut << "[!]AForm:" << f.getName() << " isSigned[" << f.getSigned() << "] reqSign[" \
-	<< f.getReqGradeSign() << "] reqExe[" << f.getReqGradeExe() <<"]";
+	<< f.getReqGradeSign() << "] reqExe[" << f.getReqGradeExe() <<"] Target:" << f.getTarget();
 	return(outPut);
 }
 

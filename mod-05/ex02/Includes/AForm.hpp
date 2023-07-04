@@ -24,23 +24,31 @@ private:
 	bool				_signed;
 	const int			_reqGradeSign;
 	const int			_reqGradeExe;
+	const std::string	_target;
 public:
 	AForm();
-	AForm(std::string name, int reqSign, int reqExe);
+	AForm(std::string name, int reqSign, int reqExe, std::string target);
 	AForm(const AForm& other);
 	AForm& operator=(const AForm &);
 	virtual ~AForm();
 	void beSigned(Bureaucrat& bur);
-	const std::string getName();
-	bool getSigned();
-	int getReqGradeSign();
-	int getReqGradeExe();
+	const std::string getTarget();
+	const std::string getName() const;
+	bool getSigned() const;
+	int getReqGradeSign() const;
+	int getReqGradeExe() const;
+	virtual void execute(Bureaucrat const & executor) const = 0;
 class GradeTooHighException : public std::exception
 {
 	public:
 		const char* what() const throw();
 };
 class GradeTooLowException : public std::exception
+{
+	public:
+		const char * what() const throw();
+};
+class FormNotSignedException : public std::exception
 {
 	public:
 		const char * what() const throw();

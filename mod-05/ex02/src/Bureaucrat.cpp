@@ -72,7 +72,7 @@ const std::string Bureaucrat::getName()
 	return (_name);
 }
 
-int Bureaucrat::getGrade()
+int Bureaucrat::getGrade() const
 {
 	return (_grade);
 }
@@ -87,6 +87,23 @@ void Bureaucrat::DecrementGrade()
 {
 	std::cout << "[DecrementGrade]: name:" << this->_name << " (" << this->_grade << "->" << (this->_grade + 1) << ")" << std::endl;
 	ApplyGrade(this->_grade + 1);
+}
+
+void Bureaucrat::executeForm(AForm const & form)
+{
+	try
+	{
+		form.execute(*this);
+		std::cout << this->getName() << " executed " << form.getName();
+	}
+	catch(AForm::GradeTooLowException)
+	{
+
+	}
+	catch(AForm::FormNotSignedException)
+	{
+
+	}
 }
 
 void Bureaucrat::ApplyGrade(int grade)
