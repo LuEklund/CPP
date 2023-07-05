@@ -31,8 +31,9 @@ public:
 	AForm(const AForm& other);
 	AForm& operator=(const AForm &);
 	virtual ~AForm();
+	void Sign();
 	void beSigned(Bureaucrat& bur);
-	const std::string getTarget();
+	const std::string getTarget() const;
 	const std::string getName() const;
 	bool getSigned() const;
 	int getReqGradeSign() const;

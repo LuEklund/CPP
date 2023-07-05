@@ -67,7 +67,7 @@ void Bureaucrat::signAForm(AForm& form)
 	return;
 }
 
-const std::string Bureaucrat::getName()
+const std::string Bureaucrat::getName() 
 {
 	return (_name);
 }
@@ -94,15 +94,15 @@ void Bureaucrat::executeForm(AForm const & form)
 	try
 	{
 		form.execute(*this);
-		std::cout << this->getName() << " executed " << form.getName();
+		std::cout << this->getName() << " executed " << form.getName() << std::endl;
 	}
-	catch(AForm::GradeTooLowException)
+	catch(Bureaucrat::GradeTooLowException)
 	{
-
+		std::cout << "[!!!] " << *this << " can not execute this form required grade:" << form.getReqGradeExe() << std::endl;
 	}
 	catch(AForm::FormNotSignedException)
 	{
-
+		std::cout << "[!!!] " << *this << " can not execute this form because it is not signed" << std::endl;
 	}
 }
 

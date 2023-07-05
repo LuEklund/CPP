@@ -16,14 +16,15 @@
 class PresidentialPardonForm : public AForm
 {
 private:
-
+	void PresidentialPardon(const std::string target) const;
 public:
 	PresidentialPardonForm();
 	PresidentialPardonForm(std::string target);
+	PresidentialPardonForm(const PresidentialPardonForm& other);
+	PresidentialPardonForm& operator=(const PresidentialPardonForm &);
+	~PresidentialPardonForm();
 	void execute(Bureaucrat const & executor) const;
-	virtual ~PresidentialPardonForm();
 };
 
-// std::ostream& operator<<(std::ostream& outPut, PresidentialPardonForm& form);
 
 #endif

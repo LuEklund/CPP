@@ -33,7 +33,7 @@ class Bureaucrat
 		Bureaucrat& operator=(const Bureaucrat &);
 		~Bureaucrat();
 		void signAForm(AForm& Aform);
-		const std::string getName();
+		const std::string getName() ;
 		int getGrade() const;
 		void IncrementGrade();
 		void DecrementGrade();

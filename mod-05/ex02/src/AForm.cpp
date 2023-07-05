@@ -46,6 +46,11 @@ AForm::~AForm()
 	std::cout << "-deConstAForm: name:" << this->_name << " sgined:" << this->_signed << std::endl;
 }
 
+void AForm::Sign()
+{
+	this->_signed = true;
+}
+
 void AForm::beSigned(Bureaucrat& bur)
 {
 	if(bur.getGrade() > this->_reqGradeSign)
@@ -58,7 +63,7 @@ const std::string AForm::getName() const
 {
 	return(_name);
 }
-const std::string AForm::getTarget()
+const std::string AForm::getTarget() const
 {
 	return(_target);
 }
