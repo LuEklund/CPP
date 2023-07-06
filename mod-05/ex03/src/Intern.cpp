@@ -21,6 +21,7 @@ Intern::Intern()
 
 Intern::Intern(const Intern& copy)
 {
+	std::cout << "+copyConst: Intern" << std::endl;
 	(void) copy;
 }
 
@@ -34,7 +35,7 @@ Intern& Intern::operator=(const Intern& copy)
 
 Intern::~Intern()
 {
-
+	std::cout << "-deConst: Intern" << std::endl;
 }
 
 AForm* Intern::makeForm(std::string FormType, std::string target)
@@ -44,9 +45,13 @@ AForm* Intern::makeForm(std::string FormType, std::string target)
 	while(i < 3)
 	{
 		if(_levels[i] == FormType)
+		{
+			std::cout << "Intern creates " << FormType << std::endl;
 			return((this->*formCreators[i])(target));
+		}
 		i++;
 	}
+	std::cout << "Error could not create " << FormType << std::endl;
 	return NULL;
 }
 

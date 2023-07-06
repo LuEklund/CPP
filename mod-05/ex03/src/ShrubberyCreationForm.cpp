@@ -51,7 +51,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
 	if(executor.getGrade() > this->getReqGradeExe())
-		throw Bureaucrat::GradeTooLowException(); //Bureaucrat grade too low exception?
+		throw Bureaucrat::GradeTooLowException();
 	else if(!this->getSigned())
 		throw AForm::FormNotSignedException();
 	else

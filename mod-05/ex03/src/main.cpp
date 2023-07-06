@@ -16,8 +16,12 @@ int main()
 	std::cout << "==================================================" << std::endl;
 	{
 		Intern someRandomIntern;
+		Bureaucrat Steve("Steve",1);
 		AForm* rrf;
-		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+		rrf = someRandomIntern.makeForm("Wrong request", "Bender");
+		rrf = someRandomIntern.makeForm("presidental request", "Bender");
+		Steve.signAForm(*rrf);
+		Steve.executeForm(*rrf);
 		delete rrf;
 	}
 	std::cout << "==================================================" << std::endl;
