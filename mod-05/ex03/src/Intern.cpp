@@ -14,6 +14,7 @@
 
 Intern::Intern()
 {
+	std::cout << "+Const: Intern" << std::endl;
 	formCreators[2] = &Intern::createPresidentialPardonForm;
 	formCreators[1] = &Intern::createRobotomyRequestForm;
 	formCreators[0] = &Intern::createShrubberyCreationForm;
@@ -22,7 +23,9 @@ Intern::Intern()
 Intern::Intern(const Intern& copy)
 {
 	std::cout << "+copyConst: Intern" << std::endl;
-	(void) copy;
+	this->formCreators[0] = copy.formCreators[0];
+	this->formCreators[1] = copy.formCreators[1];
+	this->formCreators[2] = copy.formCreators[2];
 }
 
 Intern& Intern::operator=(const Intern& copy)

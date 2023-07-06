@@ -24,6 +24,16 @@ int main()
 		Steve.executeForm(*rrf);
 		delete rrf;
 	}
+	{
+		Intern someRandomIntern;
+		Intern* someRandomInternCopy = new Intern(someRandomIntern);
+		Bureaucrat Steve("Steve",1);
+		AForm* rrf;
+		rrf = someRandomInternCopy->makeForm("presidental request", "Bender");
+		Steve.signAForm(*rrf);
+		Steve.executeForm(*rrf);
+		delete rrf;
+	}
 	std::cout << "==================================================" << std::endl;
 	return (0);
 }
