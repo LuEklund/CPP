@@ -1,4 +1,4 @@
-NAME = convert
+NAME = whatever
 
 FLAGS = -Wall -Werror -Wextra -I Includes -std=c++98
 
