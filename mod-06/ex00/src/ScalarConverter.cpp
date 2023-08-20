@@ -10,11 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ScalarConverter.hpp"
-ScalarConverter::ScalarConverter()
-{
-}
 
 Type ScalarConverter::_get_type(const std::string str)
 {

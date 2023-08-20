@@ -10,18 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
+#include "Serializer.hpp"
 
-int main(int argc, char **argv)
+int main()
 {
-	if(argc > 1)
-	{
-		ScalarConverter::convert(argv[1]);
-		std::cout << "==================================================" << std::endl;
-	}
-	{
-		// std::cout << "==================================================" << std::endl;
-		// ScalarConverter::convert("0");
-
-	}
+	Data test;
+	test.val = 10;
+	test.c = 'a';
+	uintptr_t res = Serializer::serialize(&test);
+	Data *test2 = Serializer::deserialize(res);
+	std::cout << test2->val << " " << test2->c << std::endl;
+	return(0);
 }
