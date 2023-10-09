@@ -12,13 +12,11 @@
 template <typename T>
 Array<T>::Array() : _size(0), _array(NULL)
 {
-    return ;
 }
 
 template <typename T>
 Array<T>::Array(unsigned int n) : _size(n), _array(new T[n])
 {
-    return ;
 }
 
 template <typename T>
@@ -28,7 +26,6 @@ Array<T>::Array(Array<T> const &copy) : _size(copy._size), _array(new T[copy._si
     {
         _array[i] = copy._array[i];
     }
-    return ;
 }
 
 template <typename T>

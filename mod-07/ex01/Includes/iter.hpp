@@ -15,13 +15,20 @@
 
 
 template<typename T>
-void iter(T &array,	size_t len, void (*multiplierFunction)(int))
+void iter(T *array,	size_t len, void (*function)(T const &))
 {
 	for(size_t i = 0; i < len; i++)
 	{
-		multiplierFunction(array[i]);
+		function(array[i]);
 	}
 	return ;
+}
+
+template<typename T>
+void	multiplier(T value)
+{
+	std::cout << "Value " << value << " * 2 = " << value*2 << std::endl;
+	return;
 }
 
 #endif
