@@ -25,20 +25,16 @@ private:
 	unsigned int 		_size;
 public:
 	Span(unsigned int n);
+	Span(const Span &copy);
+	Span &operator=(const Span &copy);
 	~Span();
 	void			addNumber(int number);
 	unsigned int	shortestSpan();
 	unsigned int	longestSpan();
+
+	void			addNumbers(const unsigned int amount);
 	
-	template <typename values>
-	void    addNumbers(values begin, values end)
-	{
-		while(begin != end)
-		{
-			addNumber(*begin);
-			++begin;
-		}
-	}
+
 };
 
 #endif

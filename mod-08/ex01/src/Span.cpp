@@ -53,5 +53,14 @@ unsigned int	Span::longestSpan()
         throw std::exception();
     std::vector<int> sorted = _vec;
     std::sort(sorted.begin(), sorted.end());
-    return (_vec.back() - _vec.front());
+    return (std::abs(sorted.back() - sorted.front()));
+}
+
+void    Span::addNumbers(const unsigned int amount)
+{
+    for(unsigned int i = 0; i < amount; i++)
+    {
+        addNumber(i);
+        std::cout << "using addnumbers, Adding: " << i << std::endl;
+    }
 }

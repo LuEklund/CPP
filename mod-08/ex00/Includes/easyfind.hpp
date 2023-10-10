@@ -23,7 +23,8 @@ typename T::iterator easyfind(T &conatiner, int value)
 	typename T::iterator it = std::find(conatiner.begin(), conatiner.end(), value);
 	if(it == conatiner.end())
 		throw std::exception();
-	return it;
+	else
+		return it;
 }
 
 #endif

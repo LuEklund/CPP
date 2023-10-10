@@ -21,7 +21,8 @@ template<typename T>
 class MutantStack : public std::stack<T>
 {
 private:
-	
+	MutantStack(const MutantStack &copy);
+	MutantStack &operator=(const MutantStack &copy);
 public:
 	typedef typename std::deque<T>::iterator iterator;
 	typedef typename std::deque<T>::const_iterator const_iterator;
@@ -48,7 +49,5 @@ public:
 		return (this->c.end());
 	}
 };
-
-//#include "../src/MutantStack.tpp"
 
 #endif
