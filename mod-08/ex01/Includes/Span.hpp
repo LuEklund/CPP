@@ -23,6 +23,7 @@ class Span
 private:
 	std::vector<int>	_vec;
 	unsigned int 		_size;
+	Span();
 public:
 	Span(unsigned int n);
 	Span(const Span &copy);
