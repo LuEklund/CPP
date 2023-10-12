@@ -10,18 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "BitcoinExchange.hpp"
 
-// month < 8 && month%2 != 0 (31 days)
-// month >= 8 && month%2 == 0 (31 days)
-// reset has 30 days except for febuary
-// leaps years feb 29 day (yeas%4 = 0 && (years%100 != 0 || years%400 == 0 )) is leep years (feb has 28 days)
-
-//if cant read or find data.csv exist with error. (can hard code)
-//if cant find or read input file axit. (have to be adjusted to file input n hardcode)
-
-BitcoinExchange::BitcoinExchange()
+BitcoinExchange::BitcoinExchange() : minYear(INT_MAX), minMonth(INT_MAX), minDay(INT_MAX)
 {
 };
 
@@ -50,8 +41,6 @@ float	BitcoinExchange::ft_stof(std::string value)
 	ss >> res;
 	if (ss.fail() == true)
 		return (-1);
-	if(res >= std::numeric_limits<int>::max())
-		return (-1);
 	return(res);
 }
 
@@ -67,14 +56,10 @@ int	BitcoinExchange::validMonth(std::string month)
 int	BitcoinExchange::validDay(std::string day, int year, int month)
 {
 	int	dayInt = static_cast<int>(ft_stof(day));
-		// std::cout << "[CHECKING]\n" << "[" << year << "]" << "[" << month << "]" << "[" << dayInt << "]" << std::endl;
 	if((month < 8 && month%2 != 0) || (month >= 8 && month%2 == 0))
 	{
 		if(dayInt > 31)
-		{
-			// std::cout << "to big day for month 31" << std::endl;
 			return (-1);
-		}
 	}
 	else
 	{
@@ -83,24 +68,14 @@ int	BitcoinExchange::validDay(std::string day, int year, int month)
 			if(year%4 == 0 && (year%100 != 0 || year%400 == 0))
 			{
 				if(dayInt > 29)
-				{
-					// std::cout << "to big dayInt for leap year" << std::endl;
 					return (-1);
-				}
 			}
 			else if (dayInt > 28)
-			{
-				// std::cout << "to big day for feb" << std::endl;
 				return (-1);
-			}
 		}
 		else if(dayInt > 30)
-		{
-			// std::cout << "to big dayInt for month 30" << std::endl;
 			return (-1);
-		}
 	}
-	
 	return(dayInt);
 };
 
@@ -114,14 +89,13 @@ int	BitcoinExchange::insertIntoDatabase(std::string line)
 	int				yearInt, monthInt, dayInt;
 	float			valueFloat;
 
-
 	while(i < len && line[i] != '-')
 	{
 		yearStr += line[i];
 		i++;
 	}
 	if((yearInt = static_cast<int>(ft_stof(yearStr))) < 0)
-		return (1);
+		return (INVALID_YEAR);
 	i++;
 
 	while(i < len && line[i] != '-')
@@ -130,7 +104,7 @@ int	BitcoinExchange::insertIntoDatabase(std::string line)
 		i++;
 	}
 	if((monthInt = validMonth(monthStr)) < 0)
-		return (2);
+		return (INVALID_MONTH);
 	i++;
 
 	while(i < len && line[i] != ',')
@@ -139,7 +113,7 @@ int	BitcoinExchange::insertIntoDatabase(std::string line)
 		i++;
 	}
 	if((dayInt = validDay(dayStr, yearInt, monthInt)) < 0)
-		return (3);
+		return (IMVALID_DAY);
 	i++;
 
 	while(i < len)
@@ -149,64 +123,91 @@ int	BitcoinExchange::insertIntoDatabase(std::string line)
 	}
 	valueFloat = ft_stof(valueStr);
 	if(valueFloat < 0)
-		return (4);
+		return (IMVALID_VALUE);
+	if(yearInt <= minYear && monthInt <= minMonth && dayInt <= minDay)
+	{
+		minYear = yearInt;
+		minMonth = monthInt;
+		minDay = dayInt;
+	}
 	database[yearInt][monthInt][dayInt] = valueFloat;
-	return (0);
+	return (OK);
 
 };
 
 int	BitcoinExchange::readDatabaseFile()
 {
-	std::ifstream file("data.csv");
+	unsigned		int rowNum = 1;
+	std::string		line;
+	std::ifstream	file("data.csv");
 	if(file.bad() || file.fail())
-		return (-1);
-	unsigned	int rowNum = 1;
-	std::string line;
+		return (FILE_FAIL);
 	std::getline(file,line);
 	if(line != "date,exchange_rate")
 	{
 		file.close();
-		std::cerr << "Database: invalid header section" << std::endl;
-		return (-1);
+		return (INVALID_HEADER);
 	}
 	while(std::getline(file,line))
 	{
 		rowNum++;
 		if(insertIntoDatabase(line))
-			std::cerr << "Database invalid line: " << rowNum << std::endl;
+		{
+			std::cout << "Database invalid line: " << rowNum << std::endl;
+			return(INSERTION_ERROR);
+		}
 	}
 	file.close();
-	return(0);
+	if(database.empty())
+		return (EMPTY_DATABASE);
+	return(OK);
 };
 
 
-// int	BitcoinExchange::findValidDay(int year, int month, int day)
-// {
-// 	while(day > 0)
-// 	{
-
-// 	}
-// };
-
-// int	BitcoinExchange::findValidMonth(int year, int month, int day)
-// {
-// 	while(month > 0)
-// 	{
-// 		findValidDay
-// 	}
-// };
-
-int	BitcoinExchange::thisDateValue(int year, int month, int day)
+float	BitcoinExchange::findValidDay(day daysInMonth, int dayInt)
 {
-	// while(year > 0)
-	// {
-	// 	findValidMonth
-	// }
-	int	value = year + month + day;
-	(void) value;
-	// if(database.find(year)->second.find(month)->second.find(day) != database.find(year)->second.find(month)->second.end())
-	// 	return(database.find(year)->second.find(month)->second.find(day)->second);
-	return(2);
+	while(dayInt > 0)
+	{
+		if(daysInMonth.find(dayInt) != daysInMonth.end())
+			return(daysInMonth.find(dayInt)->second);
+		dayInt--;
+	}
+	return(0);
+};
+
+float	BitcoinExchange::findValidMonthDay(month monthsInYear, int monthInt, int dayInt)
+{
+	float	value;
+	while(monthInt > 0)
+	{
+		if(monthsInYear.find(monthInt) != monthsInYear.end())
+		{
+			value = findValidDay(monthsInYear.find(monthInt)->second, dayInt);
+			if (value)
+				return(value);
+		}
+		dayInt = 31;
+		monthInt--;
+	}
+	return(0);
+};
+
+float	BitcoinExchange::thisDateValue(int yearInt, int monthInt, int dayInt)
+{
+	float	value;
+	while(yearInt >= minYear)
+	{
+		if(database.find(yearInt) != database.end())
+		{
+			value = findValidMonthDay(database.find(yearInt)->second, monthInt, dayInt);
+			if (value)
+				return(value);
+		}
+		monthInt = 12;
+		dayInt = 31;
+		yearInt--;
+	}
+	return(-1);
 };
 
 int	BitcoinExchange::lineOut(std::string line)
@@ -215,7 +216,7 @@ int	BitcoinExchange::lineOut(std::string line)
 	unsigned int	i = 0;
 	std::string		yearStr, monthStr, dayStr, valueStr;
 	int				yearInt, monthInt, dayInt;
-	float			amountFloat;
+	float			amountFloat, value;
 
 
 	while(i < len && line[i] != '-')
@@ -224,7 +225,7 @@ int	BitcoinExchange::lineOut(std::string line)
 		i++;
 	}
 	if((yearInt = static_cast<int>(ft_stof(yearStr))) < 0)
-		return (1);
+		return (INVALID_YEAR);
 	i++;
 
 	while(i < len && line[i] != '-')
@@ -233,9 +234,11 @@ int	BitcoinExchange::lineOut(std::string line)
 		i++;
 	}
 	if((monthInt = validMonth(monthStr)) < 0)
-		return (2);
+		return (INVALID_MONTH);
 	i++;
 
+	if(i+1 < len)
+		dayStr += line[i++];
 	while(i < len && line[i] != '|')
 	{
 		if(line[i] != ' ')
@@ -243,7 +246,7 @@ int	BitcoinExchange::lineOut(std::string line)
 		i++;
 	}
 	if((dayInt = validDay(dayStr, yearInt, monthInt)) < 0)
-		return (3);
+		return (IMVALID_DAY);
 	i++;
 
 	while(i < len)
@@ -253,36 +256,53 @@ int	BitcoinExchange::lineOut(std::string line)
 		i++;
 	}
 	amountFloat = ft_stof(valueStr);
-	if(amountFloat < 0)
-		return (4);
-	std::cout << amountFloat << std::endl;
-	std::cout << yearInt << "-" << monthInt << "-" << dayInt << " =>" << amountFloat << " = " \
-	<< (amountFloat * thisDateValue(yearInt, monthInt, dayInt)) << std::endl;
-	return (0);
+	if(amountFloat < 0 || amountFloat > 1000)
+		return (IMVALID_VALUE);
+	if((value = thisDateValue(yearInt, monthInt, dayInt)) < 0)
+		return(IMPOSSIBLE);
+	std::cout << yearInt << "-" << monthInt << "-" << dayInt << " => " << amountFloat << " = " \
+	<< (amountFloat * value) << std::endl;
+	return (OK);
 
 };
 
 int		BitcoinExchange::readInputFile(std::string filename)
 {
-	std:: ifstream file(filename);
+	std::string		line;
+	unsigned int	rowNum = 1;
+	std::ifstream	file(filename);
 	if(file.bad() || file.fail())
-		return (-1);
-	unsigned	int rowNum = 1;
-	std::string line;
+		return (FILE_FAIL);
 	std::getline(file,line);
 	if(line != "date | value")
 	{
 		file.close();
-		std::cerr << "inputFile: invalid header section" << std::endl;
-		return (-1);
+		return (INVALID_HEADER);
 	}
 	while(std::getline(file,line))
 	{
 		rowNum++;
-		if(lineOut(line))
-			std::cerr << "inputFile invalid line: " << rowNum << std::endl;
+		switch (lineOut(line))
+		{
+			case INVALID_YEAR:
+				std::cout << "ERROR: inputFile on line [" << rowNum << "] invalid year: " << line << std::endl;
+				break;
+			case INVALID_MONTH:
+				std::cout << "ERROR: inputFile on line [" << rowNum << "] invalid month: " << line  << std::endl;
+				break;
+			case IMVALID_DAY:
+				std::cout << "ERROR: inputFile on line [" << rowNum << "] invalid day: " << line  << std::endl;
+				break;
+			case IMVALID_VALUE:
+				std::cout << "ERROR: inputFile on line [" << rowNum << "] invalid value: " << line  << std::endl;
+				break;
+			case IMPOSSIBLE:
+			std::cout << "ERROR: inputFile on line [" << rowNum << "] We dont have data this far back: " << line  << std::endl;
+				break;
+			default:
+				break;
+		}
 	}
 	file.close();
-	return(0);
+	return(OK);
 };
-

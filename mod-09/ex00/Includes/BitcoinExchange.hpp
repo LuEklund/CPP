@@ -17,6 +17,21 @@
 # include <fstream>
 # include <sstream>
 
+enum	ERRORS
+{
+	OK,
+	FILE_FAIL,
+	INVALID_HEADER,
+	EMPTY_DATABASE,
+	INVALID_YEAR,
+	INVALID_MONTH,
+	IMVALID_DAY,
+	IMVALID_VALUE,
+	INSERTION_ERROR,
+	IMPOSSIBLE
+
+};
+
 typedef std::map < unsigned int, std::map<unsigned int, std::map<unsigned int, float > > > year;
 typedef std::map < unsigned int, std::map<unsigned int, float > > month;
 typedef std::map < unsigned int, float > day;
@@ -24,7 +39,11 @@ typedef std::map < unsigned int, float > day;
 class BitcoinExchange
 {
 private:
-	year database;
+	
+	year	database;
+	int		minYear;
+	int		minMonth;
+	int		minDay;
 
 	BitcoinExchange(const BitcoinExchange& copy);
 	BitcoinExchange &operator=(const BitcoinExchange &copy);
@@ -35,7 +54,9 @@ private:
 
 	int		insertIntoDatabase(std::string line);
 
-	int		thisDateValue(int year, int month, int day);
+	float	findValidDay(day daysInMonth, int day);
+	float	findValidMonthDay(month monthsInYear, int month, int day);
+	float	thisDateValue(int year, int month, int day);
 	int		lineOut(std::string line);
 public:
 	BitcoinExchange();
