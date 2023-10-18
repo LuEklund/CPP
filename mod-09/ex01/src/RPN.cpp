@@ -60,6 +60,7 @@ int	RPN::result(char sign, long long int *value)
 		*value = static_cast<long long int>(second) / static_cast<long long int>(first);
 		break;
 	default:
+		return (INVALID_CHAR);
 		break;
 	}
 	if (*value < INT_MIN || *value > INT_MAX)
@@ -78,22 +79,17 @@ int	RPN::assign(unsigned char c)
 			return (res);
 		myStack.push(value);
 	}
-	else
+	else if (isdigit(c))
 		myStack.push((c - '0'));
+	else
+		return(INVALID_CHAR);
 	return(OK);
 };
-
 
 int	RPN::calculate(std::string input)
 {
 	unsigned int	len = input.length();
 	int				ret;
-
-	//-2147483648 and 2147483647
-	// myStack.push(2147483647);
-	// myStack.push(2147483647);
-	// myStack.push(-2147483648);
-	// myStack.push(-2147483648);
 
 	for (unsigned int i = 0; i < len; i++)
 	{
@@ -101,8 +97,6 @@ int	RPN::calculate(std::string input)
 			i++;
 		if(i < len)
 		{
-			if (!isdigit(input[i]) && !(input[i] == '+' || input[i] == '-' || input[i] == '/' || input[i] == '*'))
-				return(INVALID_CHAR);
 			if ((ret = assign(input[i])) != OK)
 				return (ret);
 			if (i+1 < len && input[i+1] != ' ')
