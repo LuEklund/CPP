@@ -17,6 +17,7 @@
 # include <vector>
 # include <deque>
 # include <sstream>
+# include <ctime>
 
 enum RESULT
 {
@@ -33,12 +34,23 @@ class PmergeMe
 private:
 	deque	deq;
 	vector	vec;
-	unsigned int		size;
+	static const int		segmentSize = 5;
 
 	PmergeMe(const PmergeMe& copy);
 	PmergeMe &operator=(const PmergeMe &copy);
 
 	int	ft_stoi(std::string value);
+
+	void	sortVector(int start, int end);
+	void	insertionSortVector(int start, int end);
+	void	mergeVector(int curPos, int newPos, int maxLen);
+	
+	void	sortDeque(int start, int end);
+	void	insertionSortDeque(int start, int end);
+	void	mergeDeque(int curPos, int newPos, int maxLen);
+
+	void	displayVec();
+	void	displayDeq();
 
 public:
 	PmergeMe();
