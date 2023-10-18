@@ -16,6 +16,7 @@
 # include <iostream>
 # include <fstream>
 # include <sstream>
+# include <climits>
 
 enum	ERRORS
 {

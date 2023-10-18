@@ -94,7 +94,7 @@ int	BitcoinExchange::insertIntoDatabase(std::string line)
 		yearStr += line[i];
 		i++;
 	}
-	if((yearInt = static_cast<int>(ft_stof(yearStr))) < 0)
+	if((yearInt = static_cast<int>(ft_stof(yearStr))) < 0 || yearInt > 2023)
 		return (INVALID_YEAR);
 	i++;
 
@@ -224,7 +224,7 @@ int	BitcoinExchange::lineOut(std::string line)
 		yearStr += line[i];
 		i++;
 	}
-	if((yearInt = static_cast<int>(ft_stof(yearStr))) < 0)
+	if((yearInt = static_cast<int>(ft_stof(yearStr))) < 0 || yearInt > 2023)
 		return (INVALID_YEAR);
 	i++;
 
@@ -270,7 +270,7 @@ int		BitcoinExchange::readInputFile(std::string filename)
 {
 	std::string		line;
 	unsigned int	rowNum = 1;
-	std::ifstream	file(filename);
+	std::ifstream	file(filename.c_str());
 	if(file.bad() || file.fail())
 		return (FILE_FAIL);
 	std::getline(file,line);

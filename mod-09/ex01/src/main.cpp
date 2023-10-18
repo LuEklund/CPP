@@ -18,8 +18,13 @@
 //	# error => standar output
 //	# use stack
 //	# can ignore decimals and brackets
-//	- overflow protect
-//	- devision by 0 protect
+//	# overflow protect
+//	# devision by 0 protect
+
+
+//=======================
+//OVERFLOW protection shorter if cast and calcuate to bigger data type?
+//=======================
 
 
 int main(int argc, char **argv)

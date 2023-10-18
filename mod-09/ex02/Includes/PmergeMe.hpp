@@ -18,6 +18,7 @@
 # include <deque>
 # include <sstream>
 # include <ctime>
+# include <climits>
 
 enum RESULT
 {

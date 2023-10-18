@@ -36,50 +36,47 @@ int	RPN::fetchValues(int *first, int *second)
 	return (OK);
 }
 
-int	RPN::assign(unsigned char c)
+int	RPN::result(char sign, long long int *value)
 {
 	int	first;
 	int	second;
-	if (c == '+')
+
+	if (fetchValues(&first, &second) != OK)
+		return (INSUFFICIENT_VALUES);
+	switch (sign)
 	{
-		if (fetchValues(&first, &second) != OK)
-			return (INSUFFICIENT_VALUES);
-		myStack.push(second + first);
-		if ((first > 0 && second > 0 && myStack.top() < 0)
-		||	(first < 0 && second < 0 && myStack.top() > 0))
-			return(OVERFLOW);
-	}
-	else if (c == '-')
-	{
-		if (fetchValues(&first, &second) != OK)
-			return (INSUFFICIENT_VALUES);
-		myStack.push(second - first);
-		if (((-1 * first) > 0 && second > 0 && myStack.top() < 0)
-		||	((-1 * first) < 0 && second < 0 && myStack.top() > 0))
-			return(OVERFLOW);
-	}
-	else if (c == '/')
-	{
-		if (fetchValues(&first, &second) != OK)
-			return (INSUFFICIENT_VALUES);
-		else if(first == 0)
+	case '+' :
+		*value = static_cast<long long int>(second) + static_cast<long long int>(first);
+		break;
+	case '-' :
+		*value = static_cast<long long int>(second) - static_cast<long long int>(first);
+		break;
+	case '*' :
+		*value = static_cast<long long int>(second) * static_cast<long long int>(first);
+		break;
+	case '/' :
+		if(first == 0)
 			return (DIVISION_BY_ZERO);
-		else if(second == INT_MIN && first == -1)
-			return(OVERFLOW);
-		myStack.push(second / first);
+		*value = static_cast<long long int>(second) / static_cast<long long int>(first);
+		break;
+	default:
+		break;
 	}
-	else if (c == '*')
+	if (*value < INT_MIN || *value > INT_MAX)
+		return(OVERFLOW);
+	return (OK);
+}
+
+int	RPN::assign(unsigned char c)
+{
+	long long int	value;
+	int				res;
+
+	if(c == '+' || c == '-' || c == '/' || c == '*')
 	{
-		if (fetchValues(&first, &second) != OK)
-			return (INSUFFICIENT_VALUES);
-		myStack.push(second * first);
-		if((second == INT_MIN && first == -1)
-		||	(first == INT_MIN && second == -1)
-		||	(first > 0 && second > 0 && myStack.top() < 0)
-		||	(first < 0 && second < 0 && myStack.top() > 0)
-		||	(first < 0 && second > 0 && myStack.top() > 0)
-		||	(first > 0 && second < 0 && myStack.top() > 0))
-			return(OVERFLOW);
+		if((res = result(c, &value)) != OK)
+			return (res);
+		myStack.push(value);
 	}
 	else
 		myStack.push((c - '0'));
@@ -91,6 +88,12 @@ int	RPN::calculate(std::string input)
 {
 	unsigned int	len = input.length();
 	int				ret;
+
+	//-2147483648 and 2147483647
+	// myStack.push(2147483647);
+	// myStack.push(2147483647);
+	// myStack.push(-2147483648);
+	// myStack.push(-2147483648);
 
 	for (unsigned int i = 0; i < len; i++)
 	{

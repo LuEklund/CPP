@@ -14,6 +14,7 @@
 # define RPN_HPP
 # include <stack>
 # include <iostream>
+# include <climits>
 
 enum	ERROR
 {
@@ -35,6 +36,7 @@ private:
 	RPN &operator=(const RPN &copy);
 
 	int	fetchValues(int *first, int *second);
+	int	result(char sign, long long int *value);
 	int	assign(unsigned char c);
 
 public:
