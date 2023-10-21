@@ -1,7 +1,6 @@
 NAME = btc
 
-FLAGS = -Wall -Werror -Wextra -I Includes -std=c++98
-
+FLAGS = -Wall -Werror -Wextra -I Includes -std=c++98 -fsanitize=address -g
 SRC = main.cpp \
 		BitcoinExchange.cpp
 

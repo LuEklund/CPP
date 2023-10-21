@@ -212,36 +212,34 @@ void	PmergeMe::sortDeque(int curPos, int maxLen)
 //2147483647, -2147483648
 int	PmergeMe::action()
 {
-	std::clock_t start = std::clock();
+	std::clock_t startVec, startDeq, endVec, endDeq; 
+	double	time;
 
-	sortVector(0, vec.size() - 1);
-
-	std::clock_t end = std::clock();
-	std::cout << std::endl << "Vector" << std::endl;
+	std::cout << "Before: ";
 	displayVec();
 
-	double	time = double(end - start) / CLOCKS_PER_SEC;
-	std::cout << "Time taken to sort vector: " << (time * 1000) << " ms\n";
+	startVec = std::clock();
+	sortVector(0, vec.size() - 1);
+	endVec = std::clock();
 
-
-
-	start = std::clock();
-
+	startDeq = std::clock();
 	sortDeque(0, deq.size() - 1);
+	endDeq = std::clock();
 
-	end = std::clock();
-	std::cout << std::endl << "Deque" << std::endl;
+	std::cout << "After: ";
 	displayDeq();
 
-	time = double(end - start) / CLOCKS_PER_SEC;
-	std::cout << "Time taken to sort deque: " << (time * 1000) << " ms\n";
+	time = double(endVec - startVec) / CLOCKS_PER_SEC;
+	std::cout << "Time to process a range of " << vec.size() << " elements with std::vector : " << (time * 1000) << " ms" << std::endl;
+	time = double(endDeq - startDeq) / CLOCKS_PER_SEC;
+	std::cout << "Time to process a range of " << deq.size() << " elements with std::deque : " << (time * 1000) << " ms" << std::endl;
 	return(0);
 }
 
 void	PmergeMe::displayVec()
 {
 	for(vector::iterator it = vec.begin(); it != vec.end(); ++it) {
-		std::cout << ", " << *it;
+		std::cout << *it << " ";
 	}
 	std::cout << std::endl;
 };
@@ -249,7 +247,7 @@ void	PmergeMe::displayVec()
 void	PmergeMe::displayDeq()
 {
 	for(deque::iterator  it = deq.begin(); it != deq.end(); ++it) {
-		std::cout << ", " << *it;
+		std::cout << *it << " ";
 	}
 	std::cout << std::endl;
 };

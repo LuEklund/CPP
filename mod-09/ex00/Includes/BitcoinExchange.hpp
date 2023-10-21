@@ -50,6 +50,8 @@ private:
 	BitcoinExchange &operator=(const BitcoinExchange &copy);
 
 	float	ft_stof(std::string value);
+	int		ft_stoi(std::string value);
+
 	int		validMonth(std::string month);
 	int		validDay(std::string day, int year, int month);
 

@@ -44,9 +44,29 @@ float	BitcoinExchange::ft_stof(std::string value)
 	return(res);
 }
 
+int	BitcoinExchange::ft_stoi(std::string value)
+{
+	std::stringstream	ss;
+	unsigned int		res;
+	unsigned int		len = value.length();
+
+	if (len > 10)
+		return (-1);
+	for(size_t i = 0; i < len; i++)
+	{
+		if(!isdigit(value[i]))
+			return(-1);
+	}
+	ss.str(value);
+	ss >> res;
+	if (ss.fail() == true)
+		return (-1);
+	return(res);
+}
+
 int	BitcoinExchange::validMonth(std::string month)
 {
-	int	monthInt = static_cast<int>(ft_stof(month));
+	int	monthInt = ft_stoi(month);
 	if(monthInt > 12)
 		return (-1);
 	else
@@ -55,7 +75,7 @@ int	BitcoinExchange::validMonth(std::string month)
 
 int	BitcoinExchange::validDay(std::string day, int year, int month)
 {
-	int	dayInt = static_cast<int>(ft_stof(day));
+	int	dayInt = ft_stoi(day);
 	if((month < 8 && month%2 != 0) || (month >= 8 && month%2 == 0))
 	{
 		if(dayInt > 31)
@@ -94,7 +114,7 @@ int	BitcoinExchange::insertIntoDatabase(std::string line)
 		yearStr += line[i];
 		i++;
 	}
-	if((yearInt = static_cast<int>(ft_stof(yearStr))) < 0 || yearInt > 2023)
+	if(yearStr.length() > 4 || (yearInt = ft_stoi(yearStr)) < 0 || yearInt > 2023)
 		return (INVALID_YEAR);
 	i++;
 
@@ -103,7 +123,7 @@ int	BitcoinExchange::insertIntoDatabase(std::string line)
 		monthStr += line[i];
 		i++;
 	}
-	if((monthInt = validMonth(monthStr)) < 0)
+	if(monthStr.length() > 2 || (monthInt = validMonth(monthStr)) < 0 || monthInt == 0)
 		return (INVALID_MONTH);
 	i++;
 
@@ -112,7 +132,7 @@ int	BitcoinExchange::insertIntoDatabase(std::string line)
 		dayStr += line[i];
 		i++;
 	}
-	if((dayInt = validDay(dayStr, yearInt, monthInt)) < 0)
+	if(dayStr.length() > 2 || (dayInt = validDay(dayStr, yearInt, monthInt)) < 0 || dayInt == 0)
 		return (IMVALID_DAY);
 	i++;
 
@@ -224,7 +244,7 @@ int	BitcoinExchange::lineOut(std::string line)
 		yearStr += line[i];
 		i++;
 	}
-	if((yearInt = static_cast<int>(ft_stof(yearStr))) < 0 || yearInt > 2023)
+	if(yearStr.length() > 4 ||  (yearInt = ft_stoi(yearStr)) < 0 || yearInt > 2023)
 		return (INVALID_YEAR);
 	i++;
 
@@ -233,26 +253,30 @@ int	BitcoinExchange::lineOut(std::string line)
 		monthStr += line[i];
 		i++;
 	}
-	if((monthInt = validMonth(monthStr)) < 0)
+	if(monthStr.length() > 2 || (monthInt = validMonth(monthStr)) < 0 || monthInt == 0)
 		return (INVALID_MONTH);
-	i++;
-
-	if(i+1 < len)
-		dayStr += line[i++];
-	while(i < len && line[i] != '|')
-	{
-		if(line[i] != ' ')
-			dayStr += line[i];
-		i++;
-	}
-	if((dayInt = validDay(dayStr, yearInt, monthInt)) < 0)
-		return (IMVALID_DAY);
 	i++;
 
 	while(i < len)
 	{
-		if(line[i] != ' ')
-			valueStr += line[i];
+		if (line[i] == ' ' && i+1 < len && line[i+1] == '|')
+		{
+			i++;
+			break ;
+		}
+		dayStr += line[i];
+		i++;
+	}
+	if(dayStr.length() > 2 || (dayInt = validDay(dayStr, yearInt, monthInt)) < 0 || dayInt == 0)
+		return (IMVALID_DAY);
+	i++;
+
+	if(line[i] != ' ')
+		return (IMVALID_VALUE);
+	i++;
+	while(i < len)
+	{
+		valueStr += line[i];
 		i++;
 	}
 	amountFloat = ft_stof(valueStr);
@@ -263,7 +287,6 @@ int	BitcoinExchange::lineOut(std::string line)
 	std::cout << yearInt << "-" << monthInt << "-" << dayInt << " => " << amountFloat << " = " \
 	<< (amountFloat * value) << std::endl;
 	return (OK);
-
 };
 
 int		BitcoinExchange::readInputFile(std::string filename)
@@ -285,16 +308,16 @@ int		BitcoinExchange::readInputFile(std::string filename)
 		switch (lineOut(line))
 		{
 			case INVALID_YEAR:
-				std::cout << "ERROR: inputFile on line [" << rowNum << "] invalid year: " << line << std::endl;
+				std::cout << "ERROR: inputFile on line [" << rowNum << "] invalid year field: " << line << std::endl;
 				break;
 			case INVALID_MONTH:
-				std::cout << "ERROR: inputFile on line [" << rowNum << "] invalid month: " << line  << std::endl;
+				std::cout << "ERROR: inputFile on line [" << rowNum << "] invalid month field: " << line  << std::endl;
 				break;
 			case IMVALID_DAY:
-				std::cout << "ERROR: inputFile on line [" << rowNum << "] invalid day: " << line  << std::endl;
+				std::cout << "ERROR: inputFile on line [" << rowNum << "] invalid day field: " << line  << std::endl;
 				break;
 			case IMVALID_VALUE:
-				std::cout << "ERROR: inputFile on line [" << rowNum << "] invalid value: " << line  << std::endl;
+				std::cout << "ERROR: inputFile on line [" << rowNum << "] invalid value field: " << line  << std::endl;
 				break;
 			case IMPOSSIBLE:
 			std::cout << "ERROR: inputFile on line [" << rowNum << "] We dont have data this far back: " << line  << std::endl;

@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
-//	- invalid input check
-//	- store in positive integer conatiner
-//	- sort and calculate time
-//	- display time
+//	# invalid input check
+//	# store in positive integer conatiner
+//	# sort and calculate time
+//	# display time
 
 
 int main(int argc, char **argv)
@@ -28,10 +28,6 @@ int main(int argc, char **argv)
 			return(-1);
 		}
 		MyPmergeMe.action();
-		// switch(myRPN.calculate(argv[1]))
-		// {
-
-		// }
 	}
 	else
 	{
