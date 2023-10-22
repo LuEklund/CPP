@@ -1,6 +1,6 @@
 # CPP - 42Project
 
-This project is a collection of modules (00-04) from the CPP curriculum at 42. The aim is to improve familiarity with C++, moving away from C-style programming and exploring the features and complexities of C++. 
+This project is a collection of modules (00-09) from the CPP curriculum at 42. The aim is to improve familiarity with C++, moving away from C-style programming and exploring the features and complexities of C++. 
 
 ## Modules
 
