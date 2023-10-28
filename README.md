@@ -1,14 +1,19 @@
 # CPP - 42Project
 
-This project is a collection of modules (00-04) from the CPP curriculum at 42. The aim is to improve familiarity with C++, moving away from C-style programming and exploring the features and complexities of C++. 
+This project is a collection of modules (00-09) from the CPP curriculum at 42. The aim is to improve familiarity with C++, moving away from C-style programming and exploring the features and complexities of C++. 
 
 ## Modules
 
 - **Module 00:** Transition from C format to CPP. Introduction to CPP basics. 
 - **Module 01:** Exploration of CPP arrays, and understanding of memory management using 'new' and 'delete'.
-- **Module 02:** Design and implementation of a FixedPoint class.
+- **Module 02:** Design and implementation of a FixedPoint class, and class operators.
 - **Module 03:** Understanding and implementing Inheritance in C++, including Diamond Inheritance.
 - **Module 04:** Further exploration of Inheritance, focusing on Abstract Classes.
+- **Module 05:** Try/Catch and Exceptions in CPP.
+- **Module 06:** different casts in CPP.
+- **Module 07:** Templates in CPP.
+- **Module 08:** Templated containers, iterators, and algorithms in CPP.
+- **Module 09:** Containers in CPP.
 
 ## Requirements
 
