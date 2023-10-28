@@ -23,6 +23,16 @@ Point::Point(const Point &to_copy_from) : _x(to_copy_from._x), _y(to_copy_from._
 {
 }
 
+Point& Point::operator=(const Point& other)
+{
+	if (this != &other)
+	{
+		(Fixed) _x = other.getX();
+		(Fixed) _y = other.getY();
+	}
+	return (*this);
+}
+
 Fixed Point::getX() const
 {
 	return _x;
